@@ -11,7 +11,7 @@ module.exports = {
           /// Shades
           primary: "#DD5353",
           "shade-2": "#BB343A",
-          "shade-3": "#9A0D22"  ,
+          "shade-3": "#9A0D22",
           "shade-4": "#7A000C",
           "shade-5": "#5B0000",
 
@@ -22,7 +22,7 @@ module.exports = {
 
           /// Matching Gradient
           accent: "#D54B7D",
-          
+
           /// Discreet Palette
           scaffold: "#FFF4F1",
         },
@@ -33,7 +33,8 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/line-clamp'),
-  ],
+  plugins: [require("@tailwindcss/line-clamp")],
+  corePlugins: {
+    preflight: false, // To solve conflick between ant design css & tailwind css
+  },
 };

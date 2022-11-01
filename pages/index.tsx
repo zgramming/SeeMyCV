@@ -15,16 +15,17 @@ import {
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { paddingXApplication } from "../utils/constant";
 
 export default function Home() {
   return (
     <>
       <ProfileSection />
-      <ExperienceSection />
+      {/* <ExperienceSection />
       <EducationSection />
       <SkillSection />
       <LicenseAndCertificateSection />
-      <PortfolioSection />
+      <PortfolioSection /> */}
     </>
   );
 }
@@ -234,14 +235,14 @@ const ExperienceSection = () => {
 const ProfileSection = () => {
   return (
     <>
-      <div className="flex flex-col items-center px-80 pb-24">
-        <div className="font-poppins font-bold text-6xl tracking-widest pb-6">
+      <div className={`flex flex-col items-center pb-24 ${paddingXApplication}`}>
+        <div className="font-poppins font-bold text-center text-6xl tracking-widest pb-6">
           ZEFFRY REYNANDO
         </div>
-        <div className="text-2xl font-normal tracking-widest pb-10">
+        <div className="font-normal text-2xl text-center tracking-widest pb-10">
           Software Developer & Open Source Loverz
         </div>
-        <div className="font-light text-xl text-justify tracking-widest">
+        <div className="font-light text-lg text-justify tracking-widest">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius optio
           eligendi, eveniet quas tenetur vero commodi aliquid esse ab ducimus
           consequatur cumque maxime, molestias explicabo mollitia provident
@@ -252,8 +253,8 @@ const ProfileSection = () => {
           molestias?
         </div>
       </div>
-      <div className="flex flex-col items-center bg-watanasa-spot-1 p-8">
-        <div className="flex flex-row flex-wrap space-x-10 text-watanasa-shade-4">
+      <div className="flex flex-col items-center bg-watanasa-spot-1">
+        <div className={`flex flex-row flex-wrap justify-center gap-10 text-watanasa-shade-4 py-8 ${paddingXApplication}`}>
           <Tooltip title="Email" className="hover:cursor-pointer">
             <FontAwesomeIcon icon={faEnvelope} className="h-8 w-8" />
           </Tooltip>
