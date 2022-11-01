@@ -22,7 +22,7 @@ module.exports = {
 
           /// Matching Gradient
           accent: "#D54B7D",
-
+          
           /// Discreet Palette
           scaffold: "#FFF4F1",
         },
@@ -33,5 +33,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ],
 };
