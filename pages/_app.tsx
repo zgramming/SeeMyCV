@@ -2,8 +2,7 @@ import "antd/dist/antd.css";
 import "../styles/globals.css";
 
 import type { AppProps } from "next/app";
-import { Button, Drawer } from "antd";
-import { MenuOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import { Drawer } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
