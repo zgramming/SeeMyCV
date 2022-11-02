@@ -26,6 +26,9 @@ import { CVProfileInterface } from "../interface/cv/cvprofile_interface";
 import { Users } from "../interface/main_interface";
 import { calculatingExperience, dateToyMd } from "../utils/function";
 import { CVSkillInterface } from "../interface/cv/cvskill_interface";
+import { CVLicenseCertificateInterface } from "../interface/cv/cvlicensecertificate_interface";
+import { parse } from "path";
+import { FileImageOutlined, FilePdfOutlined } from "@ant-design/icons";
 
 interface Props {
   user: Users;
@@ -41,7 +44,9 @@ export default function Home(props: Props) {
       <ExperienceSection experience={props.user.CVExperience} />
       <EducationSection education={props.user.CVEducation} />
       <SkillSection skill={props.user.CVSkill} />
-      <LicenseAndCertificateSection />
+      <LicenseAndCertificateSection
+        licenseCertificate={props.user.CVLicenseCertificate}
+      />
       <PortfolioSection />
     </>
   );
@@ -90,30 +95,19 @@ const PortfolioSection = () => {
   );
 };
 
-const LicenseAndCertificateSection = () => {
+const LicenseAndCertificateSection = (props: {
+  licenseCertificate: CVLicenseCertificateInterface[];
+}) => {
   return (
     <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
       <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
         LICENSE & CERTIFICATE
       </div>
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-        {Array.from<number>({ length: 3 }).map((val, index) => (
-          <Card
-            key={index}
-            className="bg-watanasa-scaffold shadow hover:bg-watanasa-accent
-          hover:cursor-pointer hover:rounded hover:text-white
-          "
-          >
-            <div className="flex flex-row items-start space-x-5">
-              <div className="hidden lg:block">
-                <Image
-                  src={"https://picsum.photos/600"}
-                  alt="Image Company Experience"
-                  className="rounded-lg"
-                  width={60}
-                  height={60}
-                />
-              </div>
+        {props.licenseCertificate.map((val, index) => {
+          const { ext } = parse(val.file ?? "");
+          return (
+            <Card key={val.id} className="bg-watanasa-scaffold shadow">
               <div className="flex flex-col space-y-2">
                 <div className="font-bold font-poppins tracking-widest text-xl">
                   Menjadi Flutter Developer Expert (MFDE) 2019
@@ -124,10 +118,21 @@ const LicenseAndCertificateSection = () => {
                   <div className="text-sm">Juni 2014 - Juni 2017</div>
                 </div>
                 <div className="font-light">Kredensial : AXXXX5ABC</div>
+                <div>
+                  {ext === ".pdf" && (
+                    <FilePdfOutlined
+                      className="text-xl text-red-600"
+                      onClick={(e) => window.open(val.file)}
+                    ></FilePdfOutlined>
+                  )}
+                  {ext === ".png" && (
+                    <FileImageOutlined className="text-xl text-green-600"></FileImageOutlined>
+                  )}
+                </div>
               </div>
-            </div>
-          </Card>
-        ))}
+            </Card>
+          );
+        })}
       </div>
     </div>
   );
