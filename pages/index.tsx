@@ -29,6 +29,7 @@ import { CVSkillInterface } from "../interface/cv/cvskill_interface";
 import { CVLicenseCertificateInterface } from "../interface/cv/cvlicensecertificate_interface";
 import { parse } from "path";
 import { FileImageOutlined, FilePdfOutlined } from "@ant-design/icons";
+import { CVPortfolioInterface } from "../interface/cv/cvportfolio_interface";
 
 interface Props {
   user: Users;
@@ -47,22 +48,22 @@ export default function Home(props: Props) {
       <LicenseAndCertificateSection
         licenseCertificate={props.user.CVLicenseCertificate}
       />
-      <PortfolioSection />
+      <PortfolioSection portfolio={props.user.CVPortfolio} />
     </>
   );
 }
 
-const PortfolioSection = () => {
+const PortfolioSection = (props: { portfolio: CVPortfolioInterface[] }) => {
   return (
     <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
-      <div className="font-bold font-poppins text-6xl text-center tracking-widest py-24">
+      <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
         PORTFOLIO
       </div>
       <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
-        {Array.from<number>({ length: 23 }).map((val, index) => {
+        {props.portfolio.map((val, index) => {
           return (
             <Card
-              key={index}
+              key={val.id}
               bodyStyle={{ padding: 0, margin: 0 }}
               style={{
                 padding: 0,
@@ -70,20 +71,12 @@ const PortfolioSection = () => {
               }}
             >
               <div>
-                <div className="relative w-full h-40 md:h-60 lg:h-80 ">
-                  <Image
-                    src={"https://picsum.photos/900"}
-                    alt="Image Portfolio"
-                    fill
-                  />
+                <div className="relative w-full h-40 md:h-80 xl:h-52 ">
+                  <Image src={`${val.thumbnail}`} alt="Image Portfolio" fill />
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-black/25 px-5 py-2 ">
                   <div className="text-center font-semibold text-white line-clamp-2">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Laboriosam, nostrum. Atque consequatur ullam, soluta ut
-                    natus ducimus fugiat doloribus dolore, aliquid minus,
-                    consequuntur necessitatibus corporis nesciunt sed
-                    repudiandae fugit quas.
+                    {val.title}
                   </div>
                 </div>
               </div>
@@ -141,7 +134,7 @@ const LicenseAndCertificateSection = (props: {
 const SkillSection = (props: { skill: CVSkillInterface[] }) => {
   return (
     <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
-      <div className="font-bold font-poppins text-6xl text-center tracking-widest py-24">
+      <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
         SKILL
       </div>
       <div className="flex flex-row justify-end">
