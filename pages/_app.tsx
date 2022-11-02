@@ -34,7 +34,7 @@ export default function App({ Component, pageProps }: AppProps) {
 const NavigationBarCustom = () => {
   return (
     <div
-      className={`sticky top-0 z-50 h-32 bg-watanasa-scaffold mx-auto shadow-lg ${paddingXApplication}`}
+      className={`sticky top-0 z-50 h-32  bg-watanasa-scaffold mx-auto shadow-lg px-5 md:px-12 lg:px-24 xl:px-80`}
     >
       <div className="h-full flex flex-col justify-center">
         <div className="flex flex-row items-center justify-between">

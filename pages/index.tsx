@@ -16,10 +16,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { paddingXApplication } from "../utils/constant";
+import Head from "next/head";
 
 export default function Home() {
   return (
     <>
+    <Head>
+      <title>Zeffry Reynando</title>
+    </Head>
       <ProfileSection />
       <ExperienceSection />
       <EducationSection />
@@ -32,15 +36,15 @@ export default function Home() {
 
 const PortfolioSection = () => {
   return (
-    <div className={`flex flex-col ${paddingXApplication}`}>
+    <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
       <div className="font-bold font-poppins text-6xl text-center tracking-widest py-24">
         PORTFOLIO
       </div>
       <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
-        {Array.from<number>({ length: 23 }).map((val) => {
+        {Array.from<number>({ length: 23 }).map((val,index) => {
           return (
             <Card
-              key={val}
+              key={index}
               bodyStyle={{ padding: 0, margin: 0 }}
               style={{
                 padding: 0,
@@ -75,14 +79,14 @@ const PortfolioSection = () => {
 
 const LicenseAndCertificateSection = () => {
   return (
-    <div className={`flex flex-col ${paddingXApplication}`}>
+    <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
       <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
         LICENSE & CERTIFICATE
       </div>
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
         {Array.from<number>({ length: 3 }).map((val, index) => (
           <Card
-            key={val}
+            key={index}
             className="bg-watanasa-scaffold shadow hover:bg-watanasa-accent
           hover:cursor-pointer hover:rounded hover:text-white
           "
@@ -118,7 +122,7 @@ const LicenseAndCertificateSection = () => {
 
 const SkillSection = () => {
   return (
-    <div className={`flex flex-col ${paddingXApplication}`}>
+    <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
       <div className="font-bold font-poppins text-6xl text-center tracking-widest py-24">
         SKILL
       </div>
@@ -126,10 +130,10 @@ const SkillSection = () => {
         <a className="font-bold text-blue-600">See More</a>
       </div>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {Array.from<number>({ length: 10 }).map((val) => {
+        {Array.from<number>({ length: 10 }).map((val,index) => {
           return (
             <Card
-              key={val}
+              key={index}
               headStyle={{ color: "white" }}
               className="bg-watanasa-accent text-white"
               title="Advance"
@@ -145,13 +149,13 @@ const SkillSection = () => {
 
 const EducationSection = () => {
   return (
-    <div className={`flex flex-col ${paddingXApplication}`}>
+    <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
       <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
         EDUCATION
       </div>
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
         {Array.from<number>({ length: 3 }).map((val, index) => (
-          <Card key={val} className="bg-watanasa-scaffold shadow">
+          <Card key={index} className="bg-watanasa-scaffold shadow">
             <div className="flex flex-row items-start space-x-5">
               <Image
                 src={"https://picsum.photos/600"}
@@ -182,13 +186,13 @@ const EducationSection = () => {
 
 const ExperienceSection = () => {
   return (
-    <div className={`flex flex-col ${paddingXApplication}`}>
+    <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
       <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
         EXPERIENCE
       </div>
       <div className="grid grid-cols-1 gap-10">
         {Array.from<number>({ length: 10 }).map((val, index) => (
-          <Card key={val} className="bg-watanasa-scaffold shadow">
+          <Card key={index} className="bg-watanasa-scaffold shadow">
             <div className="flex flex-row items-start space-x-5">
               <div className="hidden md:block">
                 <Image
@@ -240,7 +244,7 @@ const ProfileSection = () => {
   return (
     <>
       <div
-        className={`flex flex-col items-center pb-24 ${paddingXApplication}`}
+        className={`flex flex-col items-center pb-24 px-5 md:px-12 lg:px-24 xl:px-80`}
       >
         <div className="font-poppins font-bold text-center text-5xl tracking-widest pb-6">
           ZEFFRY REYNANDO
@@ -261,7 +265,7 @@ const ProfileSection = () => {
       </div>
       <div className="flex flex-col items-center bg-watanasa-spot-1">
         <div
-          className={`flex flex-row flex-wrap justify-center gap-10 text-watanasa-shade-4 py-8 ${paddingXApplication}`}
+          className={`flex flex-row flex-wrap justify-center gap-10 text-watanasa-shade-4 py-8 px-5 md:px-12 lg:px-24 xl:px-80`}
         >
           <Tooltip title="Email" className="hover:cursor-pointer">
             <FontAwesomeIcon icon={faEnvelope} className="h-8 w-8" />
