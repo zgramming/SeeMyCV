@@ -21,22 +21,22 @@ export default function Home() {
   return (
     <>
       <ProfileSection />
-      {/* <ExperienceSection />
+      <ExperienceSection />
       <EducationSection />
       <SkillSection />
       <LicenseAndCertificateSection />
-      <PortfolioSection /> */}
+      <PortfolioSection />
     </>
   );
 }
 
 const PortfolioSection = () => {
   return (
-    <div className="flex flex-col px-80">
+    <div className={`flex flex-col ${paddingXApplication}`}>
       <div className="font-bold font-poppins text-6xl text-center tracking-widest py-24">
         PORTFOLIO
       </div>
-      <div className="grid grid-cols-1 gap-4 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
         {Array.from<number>({ length: 23 }).map((val) => {
           return (
             <Card
@@ -48,7 +48,7 @@ const PortfolioSection = () => {
               }}
             >
               <div>
-                <div className="relative w-full h-80">
+                <div className="relative w-full h-40 md:h-60 lg:h-80 ">
                   <Image
                     src={"https://picsum.photos/900"}
                     alt="Image Portfolio"
@@ -75,11 +75,11 @@ const PortfolioSection = () => {
 
 const LicenseAndCertificateSection = () => {
   return (
-    <div className="flex flex-col px-80">
-      <div className="font-bold font-poppins text-6xl text-center tracking-widest py-24">
+    <div className={`flex flex-col ${paddingXApplication}`}>
+      <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
         LICENSE & CERTIFICATE
       </div>
-      <div className="grid grid-cols-2 gap-10">
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
         {Array.from<number>({ length: 3 }).map((val, index) => (
           <Card
             key={val}
@@ -88,6 +88,7 @@ const LicenseAndCertificateSection = () => {
           "
           >
             <div className="flex flex-row items-start space-x-5">
+              <div className="hidden lg:block">
               <Image
                 src={"https://picsum.photos/600"}
                 alt="Image Company Experience"
@@ -95,6 +96,7 @@ const LicenseAndCertificateSection = () => {
                 width={60}
                 height={60}
               />
+              </div>
               <div className="flex flex-col space-y-2">
                 <div className="font-bold font-poppins tracking-widest text-xl">
                   Menjadi Flutter Developer Expert (MFDE) 2019
@@ -116,14 +118,14 @@ const LicenseAndCertificateSection = () => {
 
 const SkillSection = () => {
   return (
-    <div className="flex flex-col px-80">
+    <div className={`flex flex-col ${paddingXApplication}`}>
       <div className="font-bold font-poppins text-6xl text-center tracking-widest py-24">
         SKILL
       </div>
       <div className="flex flex-row justify-end">
         <a className="font-bold text-blue-600">See More</a>
       </div>
-      <div className="grid grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {Array.from<number>({ length: 10 }).map((val) => {
           return (
             <Card
@@ -143,11 +145,11 @@ const SkillSection = () => {
 
 const EducationSection = () => {
   return (
-    <div className="flex flex-col px-80">
-      <div className="font-bold font-poppins text-6xl text-center tracking-widest py-24">
+    <div className={`flex flex-col ${paddingXApplication}`}>
+      <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
         EDUCATION
       </div>
-      <div className="grid grid-cols-2 gap-10">
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
         {Array.from<number>({ length: 3 }).map((val, index) => (
           <Card key={val} className="bg-watanasa-scaffold shadow">
             <div className="flex flex-row items-start space-x-5">
@@ -180,21 +182,23 @@ const EducationSection = () => {
 
 const ExperienceSection = () => {
   return (
-    <div className="flex flex-col px-80">
-      <div className="font-bold font-poppins text-6xl text-center tracking-widest py-24">
+    <div className={`flex flex-col ${paddingXApplication}`}>
+      <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
         EXPERIENCE
       </div>
       <div className="grid grid-cols-1 gap-10">
         {Array.from<number>({ length: 10 }).map((val, index) => (
           <Card key={val} className="bg-watanasa-scaffold shadow">
             <div className="flex flex-row items-start space-x-5">
-              <Image
-                src={"https://picsum.photos/600"}
-                alt="Image Company Experience"
-                className="rounded-lg"
-                width={60}
-                height={60}
-              />
+              <div className="hidden md:block">
+                <Image
+                  src={"https://picsum.photos/600"}
+                  alt="Image Company Experience"
+                  className="rounded-lg"
+                  width={60}
+                  height={60}
+                />
+              </div>
               <div className="flex flex-col space-y-2">
                 <div className="font-bold font-poppins tracking-widest text-2xl">
                   PT Brilyan Trimatra Utama
@@ -235,8 +239,10 @@ const ExperienceSection = () => {
 const ProfileSection = () => {
   return (
     <>
-      <div className={`flex flex-col items-center pb-24 ${paddingXApplication}`}>
-        <div className="font-poppins font-bold text-center text-6xl tracking-widest pb-6">
+      <div
+        className={`flex flex-col items-center pb-24 ${paddingXApplication}`}
+      >
+        <div className="font-poppins font-bold text-center text-5xl tracking-widest pb-6">
           ZEFFRY REYNANDO
         </div>
         <div className="font-normal text-2xl text-center tracking-widest pb-10">
@@ -254,7 +260,9 @@ const ProfileSection = () => {
         </div>
       </div>
       <div className="flex flex-col items-center bg-watanasa-spot-1">
-        <div className={`flex flex-row flex-wrap justify-center gap-10 text-watanasa-shade-4 py-8 ${paddingXApplication}`}>
+        <div
+          className={`flex flex-row flex-wrap justify-center gap-10 text-watanasa-shade-4 py-8 ${paddingXApplication}`}
+        >
           <Tooltip title="Email" className="hover:cursor-pointer">
             <FontAwesomeIcon icon={faEnvelope} className="h-8 w-8" />
           </Tooltip>
