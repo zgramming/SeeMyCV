@@ -1,26 +1,22 @@
-import { Card, Tag, Tooltip } from "antd";
-import Image from "next/image";
+import { Card, Tag, Tooltip } from 'antd';
+import axios from 'axios';
+import { GetServerSideProps } from 'next';
+import Head from 'next/head';
+import Image from 'next/image';
+import { env } from 'process';
 
+import { faGithub, faInstagram, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import {
-  faGithub,
-  faInstagram,
-  faLinkedin,
-  faTwitter,
-} from "@fortawesome/free-brands-svg-icons";
+    faCalendar, faEnvelope, faFilePdf, faGlobe, faPhone
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { CVExperienceInterface } from '../interface/cv/cvexperience_interface';
+import { CVProfileInterface } from '../interface/cv/cvprofile_interface';
+import { Users } from '../interface/main_interface';
 import {
-  faCalendar,
-  faEnvelope,
-  faFilePdf,
-  faGlobe,
-  faPhone,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Head from "next/head";
-import { GetServerSideProps } from "next";
-import axios from "axios";
-import { env } from "process";
-import { Users } from "../interface/main_interface";
-import { CVProfileInterface } from "../interface/cv/cvprofile_interface";
+    calculatingExperience, convertTotalDaysTo, dateToyMd, diffDateInDays
+} from '../utils/function';
 
 interface Props {
   user: Users;
@@ -33,7 +29,7 @@ export default function Home(props: Props) {
         <title>{props.user.name}</title>
       </Head>
       <ProfileSection profile={props.user.CVProfile} />
-      <ExperienceSection />
+      <ExperienceSection experience={props.user.CVExperience} />
       <EducationSection />
       <SkillSection />
       <LicenseAndCertificateSection />
@@ -192,57 +188,74 @@ const EducationSection = () => {
   );
 };
 
-const ExperienceSection = () => {
+const ExperienceSection = (props: { experience: CVExperienceInterface[] }) => {
   return (
     <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
       <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
         EXPERIENCE
       </div>
       <div className="grid grid-cols-1 gap-10">
-        {Array.from<number>({ length: 10 }).map((val, index) => (
-          <Card key={index} className="bg-watanasa-scaffold shadow">
-            <div className="flex flex-row items-start space-x-5">
-              <div className="hidden md:block">
-                <Image
-                  src={"https://picsum.photos/600"}
-                  alt="Image Company Experience"
-                  className="rounded-lg"
-                  width={60}
-                  height={60}
-                />
-              </div>
-              <div className="flex flex-col space-y-2">
-                <div className="font-bold font-poppins tracking-widest text-2xl">
-                  PT Brilyan Trimatra Utama
+        {props.experience.map((val, index) => {
+          const startDate = new Date(val.start_date);
+          const endDate = val.end_date && new Date(val.end_date);
+          const calculating = calculatingExperience(
+            startDate,
+            endDate ?? new Date()
+          );
+          const tags = val.tags && (JSON.parse(val.tags) as string[]);
+          return (
+            <Card key={val.id} className="bg-watanasa-scaffold shadow">
+              <div className="flex flex-row items-start space-x-5">
+                <div className="hidden md:block">
+                  <Image
+                    src={`${val.image_company}`}
+                    alt="Image Company Experience"
+                    className="rounded-lg"
+                    width={60}
+                    height={60}
+                  />
                 </div>
-                <div className="font-semibold text-xl">Web Developer</div>
-                <div className="flex flex-row items-center space-x-2 pb-5">
-                  <FontAwesomeIcon icon={faCalendar} />
-                  <div className="text-sm">
-                    4 April 2020 - 4 April 2022 (2 Years Experience)
+                <div className="flex flex-col space-y-2">
+                  <div className="font-bold font-poppins tracking-widest text-2xl">
+                    {val.company}
+                  </div>
+                  <div className="font-semibold text-xl">{val.job}</div>
+                  <div className="flex flex-row items-center space-x-2 pb-5">
+                    <FontAwesomeIcon icon={faCalendar} />
+                    <div className="text-sm">
+                      {dateToyMd(startDate)} -{" "}
+                      {endDate ? dateToyMd(endDate) : "Sekarang"} {calculating}
+                    </div>
+                  </div>
+                  <div className="text-justify font-light">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Corrupti, facilis asperiores? Veniam ratione quas rerum,
+                    earum ipsam fugit quasi odio est provident illum temporibus
+                    officiis modi sit placeat aliquid cumque. Lorem ipsum dolor
+                    sit amet consectetur adipisicing elit. Quod pariatur
+                    voluptatem architecto placeat dolorum laudantium fugit quae
+                    quas dignissimos debitis delectus aliquam est eum rem, illum
+                    dolorem itaque ipsa molestiae. Lorem ipsum dolor sit amet
+                    consectetur adipisicing elit. Ipsa ea doloribus voluptas
+                    totam cum amet quaerat nulla id earum cumque libero
+                    explicabo expedita temporibus, labore vel obcaecati alias
+                    consectetur tempora?
+                  </div>
+                  <div className="flex flex-row flex-wrap gap-2">
+                    {tags &&
+                      tags.map((val, index) => {
+                        return (
+                          <Tag key={`${val}_${index}`} color="green">
+                            {val}
+                          </Tag>
+                        );
+                      })}
                   </div>
                 </div>
-                <div className="text-justify font-light">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Corrupti, facilis asperiores? Veniam ratione quas rerum, earum
-                  ipsam fugit quasi odio est provident illum temporibus officiis
-                  modi sit placeat aliquid cumque. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Quod pariatur voluptatem
-                  architecto placeat dolorum laudantium fugit quae quas
-                  dignissimos debitis delectus aliquam est eum rem, illum
-                  dolorem itaque ipsa molestiae. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Ipsa ea doloribus voluptas totam
-                  cum amet quaerat nulla id earum cumque libero explicabo
-                  expedita temporibus, labore vel obcaecati alias consectetur
-                  tempora?
-                </div>
-                <div className="flex flex-row flex-wrap">
-                  <Tag color="green">SQL Server</Tag>
-                </div>
               </div>
-            </div>
-          </Card>
-        ))}
+            </Card>
+          );
+        })}
       </div>
     </div>
   );

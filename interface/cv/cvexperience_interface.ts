@@ -6,7 +6,7 @@ export interface CVExperienceInterface {
   company: string;
   job: string;
   start_date: Date;
-  end_date: Date;
+  end_date?: Date;
   description: string;
   image_company?: string;
   is_graduated: boolean;
