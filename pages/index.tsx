@@ -25,6 +25,7 @@ import { CVExperienceInterface } from "../interface/cv/cvexperience_interface";
 import { CVProfileInterface } from "../interface/cv/cvprofile_interface";
 import { Users } from "../interface/main_interface";
 import { calculatingExperience, dateToyMd } from "../utils/function";
+import { CVSkillInterface } from "../interface/cv/cvskill_interface";
 
 interface Props {
   user: Users;
@@ -39,7 +40,7 @@ export default function Home(props: Props) {
       <ProfileSection profile={props.user.CVProfile} />
       <ExperienceSection experience={props.user.CVExperience} />
       <EducationSection education={props.user.CVEducation} />
-      <SkillSection />
+      <SkillSection skill={props.user.CVSkill} />
       <LicenseAndCertificateSection />
       <PortfolioSection />
     </>
@@ -132,7 +133,7 @@ const LicenseAndCertificateSection = () => {
   );
 };
 
-const SkillSection = () => {
+const SkillSection = (props: { skill: CVSkillInterface[] }) => {
   return (
     <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
       <div className="font-bold font-poppins text-6xl text-center tracking-widest py-24">
@@ -142,15 +143,18 @@ const SkillSection = () => {
         <a className="font-bold text-blue-600">See More</a>
       </div>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {Array.from<number>({ length: 10 }).map((val, index) => {
+        {props.skill.map((val, index) => {
           return (
             <Card
-              key={index}
+              key={val.id}
+              title={val.level.name}
               headStyle={{ color: "white" }}
-              className="bg-watanasa-accent text-white"
-              title="Advance"
+              className="text-white"
+              style={{
+                backgroundColor: `${val.level.parameter1_value}`,
+              }}
             >
-              <div className="text-center font-bold text-xl">SQL SERVER</div>
+              <div className="text-center font-bold text-xl">{val.name}</div>
             </Card>
           );
         })}
