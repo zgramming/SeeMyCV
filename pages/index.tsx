@@ -2,7 +2,6 @@ import { Button } from "antd";
 import Head from "next/head";
 import Image from "next/image";
 
-import { Users } from "../interface/main_interface";
 import BG1 from "../public/images/bg_index_1.png";
 import BG2 from "../public/images/bg_index_2.png";
 import BG3 from "../public/images/bg_index_3.png";
