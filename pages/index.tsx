@@ -3,8 +3,10 @@ import axios from "axios";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { parse } from "path";
 import { env } from "process";
 
+import { FileImageOutlined, FilePdfOutlined } from "@ant-design/icons";
 import {
   faGithub,
   faInstagram,
@@ -22,14 +24,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { CVEducationInterface } from "../interface/cv/cveducation_interface";
 import { CVExperienceInterface } from "../interface/cv/cvexperience_interface";
+import { CVLicenseCertificateInterface } from "../interface/cv/cvlicensecertificate_interface";
+import { CVPortfolioInterface } from "../interface/cv/cvportfolio_interface";
 import { CVProfileInterface } from "../interface/cv/cvprofile_interface";
+import { CVSkillInterface } from "../interface/cv/cvskill_interface";
 import { Users } from "../interface/main_interface";
 import { calculatingExperience, dateToyMd } from "../utils/function";
-import { CVSkillInterface } from "../interface/cv/cvskill_interface";
-import { CVLicenseCertificateInterface } from "../interface/cv/cvlicensecertificate_interface";
-import { parse } from "path";
-import { FileImageOutlined, FilePdfOutlined } from "@ant-design/icons";
-import { CVPortfolioInterface } from "../interface/cv/cvportfolio_interface";
 
 interface Props {
   user: Users;
