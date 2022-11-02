@@ -1,22 +1,30 @@
-import { Card, Tag, Tooltip } from 'antd';
-import axios from 'axios';
-import { GetServerSideProps } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
-import { env } from 'process';
+import { Card, Tag, Tooltip } from "antd";
+import axios from "axios";
+import { GetServerSideProps } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import { env } from "process";
 
-import { faGithub, faInstagram, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import {
-    faCalendar, faEnvelope, faFilePdf, faGlobe, faPhone
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+  faGithub,
+  faInstagram,
+  faLinkedin,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
+import {
+  faCalendar,
+  faEnvelope,
+  faFilePdf,
+  faGlobe,
+  faPhone,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { CVExperienceInterface } from '../interface/cv/cvexperience_interface';
-import { CVProfileInterface } from '../interface/cv/cvprofile_interface';
-import { Users } from '../interface/main_interface';
-import {
-    calculatingExperience, convertTotalDaysTo, dateToyMd, diffDateInDays
-} from '../utils/function';
+import { CVEducationInterface } from "../interface/cv/cveducation_interface";
+import { CVExperienceInterface } from "../interface/cv/cvexperience_interface";
+import { CVProfileInterface } from "../interface/cv/cvprofile_interface";
+import { Users } from "../interface/main_interface";
+import { calculatingExperience, dateToyMd } from "../utils/function";
 
 interface Props {
   user: Users;
@@ -30,7 +38,7 @@ export default function Home(props: Props) {
       </Head>
       <ProfileSection profile={props.user.CVProfile} />
       <ExperienceSection experience={props.user.CVExperience} />
-      <EducationSection />
+      <EducationSection education={props.user.CVEducation} />
       <SkillSection />
       <LicenseAndCertificateSection />
       <PortfolioSection />
@@ -151,38 +159,57 @@ const SkillSection = () => {
   );
 };
 
-const EducationSection = () => {
+const EducationSection = (props: { education: CVEducationInterface[] }) => {
   return (
     <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
       <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
         EDUCATION
       </div>
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-        {Array.from<number>({ length: 3 }).map((val, index) => (
-          <Card key={index} className="bg-watanasa-scaffold shadow">
-            <div className="flex flex-row items-start space-x-5">
-              <Image
-                src={"https://picsum.photos/600"}
-                alt="Image Company Experience"
-                className="rounded-lg"
-                width={60}
-                height={60}
-              />
-              <div className="flex flex-col space-y-2">
-                <div className="font-bold font-poppins tracking-widest text-xl">
-                  SMK Negeri 1 Kota Bekasi
-                </div>
-                <div className="text-base">
-                  Rekayasa Perangkat Lunak - Vocational School
-                </div>
-                <div className="flex flex-row items-center space-x-2">
-                  <FontAwesomeIcon icon={faCalendar} />
-                  <div className="text-sm">Juni 2014 - Juni 2017</div>
+        {props.education.map((val, index) => {
+          const startDate = new Date(val.start_date);
+          const endDate = val.end_date && new Date(val.end_date);
+          return (
+            <Card key={val.id} className="bg-watanasa-scaffold shadow">
+              <div className="flex flex-row items-start space-x-5">
+                <Image
+                  src={`${val.image}`}
+                  alt="Image Company Experience"
+                  className="rounded-lg"
+                  width={60}
+                  height={60}
+                  onError={(e) => {
+                    return <div>Error</div>;
+                  }}
+                />
+                <div className="flex flex-col space-y-2">
+                  <div className="font-bold font-poppins tracking-widest text-xl">
+                    {val.name}
+                  </div>
+                  <div className="text-base">
+                    {val.major} - {val.field_of_study}
+                  </div>
+                  <div className="flex flex-row items-center space-x-2">
+                    <FontAwesomeIcon icon={faCalendar} />
+                    <div className="text-sm">
+                      {startDate.toLocaleDateString("id-ID", {
+                        month: "short",
+                        year: "numeric",
+                      })}
+                      {" - "}
+                      {endDate
+                        ? endDate.toLocaleDateString("id-ID", {
+                            month: "short",
+                            year: "numeric",
+                          })
+                        : "Sekarang"}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </Card>
-        ))}
+            </Card>
+          );
+        })}
       </div>
     </div>
   );
