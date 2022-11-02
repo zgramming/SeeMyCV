@@ -16,14 +16,23 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
+import { GetServerSideProps } from "next";
+import axios from "axios";
+import { env } from "process";
+import { Users } from "../interface/main_interface";
+import { CVProfileInterface } from "../interface/cv/cvprofile_interface";
 
-export default function Home() {
+interface Props {
+  user: Users;
+}
+
+export default function Home(props: Props) {
   return (
     <>
-    <Head>
-      <title>Zeffry Reynando</title>
-    </Head>
-      <ProfileSection />
+      <Head>
+        <title>{props.user.name}</title>
+      </Head>
+      <ProfileSection profile={props.user.CVProfile} />
       <ExperienceSection />
       <EducationSection />
       <SkillSection />
@@ -40,7 +49,7 @@ const PortfolioSection = () => {
         PORTFOLIO
       </div>
       <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
-        {Array.from<number>({ length: 23 }).map((val,index) => {
+        {Array.from<number>({ length: 23 }).map((val, index) => {
           return (
             <Card
               key={index}
@@ -92,13 +101,13 @@ const LicenseAndCertificateSection = () => {
           >
             <div className="flex flex-row items-start space-x-5">
               <div className="hidden lg:block">
-              <Image
-                src={"https://picsum.photos/600"}
-                alt="Image Company Experience"
-                className="rounded-lg"
-                width={60}
-                height={60}
-              />
+                <Image
+                  src={"https://picsum.photos/600"}
+                  alt="Image Company Experience"
+                  className="rounded-lg"
+                  width={60}
+                  height={60}
+                />
               </div>
               <div className="flex flex-col space-y-2">
                 <div className="font-bold font-poppins tracking-widest text-xl">
@@ -129,7 +138,7 @@ const SkillSection = () => {
         <a className="font-bold text-blue-600">See More</a>
       </div>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {Array.from<number>({ length: 10 }).map((val,index) => {
+        {Array.from<number>({ length: 10 }).map((val, index) => {
           return (
             <Card
               key={index}
@@ -239,59 +248,120 @@ const ExperienceSection = () => {
   );
 };
 
-const ProfileSection = () => {
+const ProfileSection = (props: { profile: CVProfileInterface }) => {
   return (
     <>
       <div
         className={`flex flex-col items-center pb-24 px-5 md:px-12 lg:px-24 xl:px-80`}
       >
         <div className="font-poppins font-bold text-center text-5xl tracking-widest pb-6">
-          ZEFFRY REYNANDO
+          {props.profile.name.toUpperCase()}
         </div>
         <div className="font-normal text-2xl text-center tracking-widest pb-10">
-          Software Developer & Open Source Loverz
+          {props.profile.motto}
         </div>
         <div className="font-light text-lg text-justify tracking-widest">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius optio
-          eligendi, eveniet quas tenetur vero commodi aliquid esse ab ducimus
-          consequatur cumque maxime, molestias explicabo mollitia provident
-          omnis voluptatem voluptatibus. Lorem, ipsum dolor sit amet consectetur
-          adipisicing elit. Cumque ex at blanditiis similique accusantium
-          doloribus quibusdam consectetur, tempore nihil delectus expedita
-          consequuntur voluptatem suscipit deleniti totam aut facere? Eveniet,
-          molestias?
+          {props.profile.description}
         </div>
       </div>
       <div className="flex flex-col items-center bg-watanasa-spot-1">
         <div
           className={`flex flex-row flex-wrap justify-center gap-10 text-watanasa-shade-4 py-8 px-5 md:px-12 lg:px-24 xl:px-80`}
         >
-          <Tooltip title="Email" className="hover:cursor-pointer">
-            <FontAwesomeIcon icon={faEnvelope} className="h-8 w-8" />
-          </Tooltip>
-          <Tooltip title="Twitter" className="hover:cursor-pointer">
-            <FontAwesomeIcon icon={faTwitter} className="h-8 w-8" />
-          </Tooltip>
-          <Tooltip title="Instagram" className="hover:cursor-pointer">
-            <FontAwesomeIcon icon={faInstagram} className="h-8 w-8" />
-          </Tooltip>
-          <Tooltip title="Phone" className="hover:cursor-pointer">
-            <FontAwesomeIcon icon={faPhone} className="h-8 w-8" />
-          </Tooltip>
-          <Tooltip title="LinkedIn" className="hover:cursor-pointer">
-            <FontAwesomeIcon icon={faLinkedin} className="h-8 w-8" />
-          </Tooltip>
-          <Tooltip title="Web" className="hover:cursor-pointer">
-            <FontAwesomeIcon icon={faGlobe} className="h-8 w-8" />
-          </Tooltip>
-          <Tooltip title="Latest CV" className="hover:cursor-pointer">
-            <FontAwesomeIcon icon={faFilePdf} className="h-8 w-8" />
-          </Tooltip>
-          <Tooltip title="Github" className="hover:cursor-pointer">
-            <FontAwesomeIcon icon={faGithub} className="h-8 w-8" />
-          </Tooltip>
+          {props.profile.email && (
+            <Tooltip title="Email" className="hover:cursor-pointer">
+              <FontAwesomeIcon
+                icon={faEnvelope}
+                className="h-8 w-8"
+                onClick={(e) => {
+                  window.open(
+                    `https://mail.google.com/mail/?view=cm&fs=1&to=${props.profile.email}`
+                  );
+                }}
+              />
+            </Tooltip>
+          )}
+
+          {props.profile.twitter && (
+            <Tooltip title="Twitter" className="hover:cursor-pointer">
+              <FontAwesomeIcon
+                icon={faTwitter}
+                className="h-8 w-8"
+                onClick={(e) => window.open(props.profile.twitter)}
+              />
+            </Tooltip>
+          )}
+          {props.profile.instagram && (
+            <Tooltip title="Instagram" className="hover:cursor-pointer">
+              <FontAwesomeIcon
+                icon={faInstagram}
+                className="h-8 w-8"
+                onClick={(e) => window.open(props.profile.instagram)}
+              />
+            </Tooltip>
+          )}
+
+          {props.profile.phone && (
+            <Tooltip
+              title={`${props.profile.phone}`}
+              className="hover:cursor-pointer"
+            >
+              <FontAwesomeIcon icon={faPhone} className="h-8 w-8" />
+            </Tooltip>
+          )}
+          {props.profile.linkedIn && (
+            <Tooltip title="LinkedIn" className="hover:cursor-pointer">
+              <FontAwesomeIcon
+                icon={faLinkedin}
+                className="h-8 w-8"
+                onClick={(e) => window.open(props.profile.linkedIn)}
+              />
+            </Tooltip>
+          )}
+          {props.profile.web && (
+            <Tooltip title="Web" className="hover:cursor-pointer">
+              <FontAwesomeIcon
+                icon={faGlobe}
+                className="h-8 w-8"
+                onClick={(e) => window.open(props.profile.web)}
+              />
+            </Tooltip>
+          )}
+          {props.profile.latest_resume && (
+            <Tooltip title="Latest CV" className="hover:cursor-pointer">
+              <FontAwesomeIcon
+                icon={faFilePdf}
+                className="h-8 w-8"
+                onClick={(e) => window.open(props.profile.latest_resume)}
+              />
+            </Tooltip>
+          )}
+          {props.profile.github && (
+            <Tooltip title="Github" className="hover:cursor-pointer">
+              <FontAwesomeIcon
+                icon={faGithub}
+                className="h-8 w-8"
+                onClick={(e) => window.open(props.profile.github)}
+              />
+            </Tooltip>
+          )}
         </div>
       </div>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const response = await axios.get(`${env.BASEAPIURL}/v1/user/zeffry`);
+  const {
+    success,
+    message,
+    data,
+  }: { success: boolean; message: string; data: Users } = response.data;
+
+  return {
+    props: {
+      user: data,
+    },
+  };
 };
