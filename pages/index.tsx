@@ -1,6 +1,8 @@
-import { Button, Col, Row } from "antd";
+import { Button, Col, Form, Input, Modal, notification, Row, Spin } from "antd";
+import axios from "axios";
 import Head from "next/head";
 import Image from "next/image";
+import { useState } from "react";
 
 import BG1 from "../public/images/bg_index_1.png";
 import BG2 from "../public/images/bg_index_2.png";
@@ -51,7 +53,7 @@ const CreatePreviewSection = () => {
             <div className="font-light text-xl">
               You can easily see the website layout that will be formed by our
               system, besides that you can also generate PDFs based on your
-              custom content.{" "}
+              custom content.
               <u>
                 <b>
                   <i>This feature still phase development</i>
@@ -166,6 +168,166 @@ const FCCSection = () => {
   );
 };
 
+const ButtonSignUp = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [form] = Form.useForm();
+
+  const onFinish = async () => {
+    try {
+      setIsLoading(true);
+      const url = process.env.NEXT_PUBLIC_BASEAPIURL + `/user/signup`;
+      const { email, username, password } = await form.validateFields();
+      const { data, status } = await axios.post(url, {
+        username,
+        password,
+        email,
+      });
+
+      const { success, message, data: dataResponse } = data;
+
+      console.log({
+        email,
+        username,
+        password,
+      });
+
+      notification.success({
+        message: "Success Sign Up",
+        description: message,
+      });
+
+      setIsModalOpen(false);
+    } catch (e: any) {
+      const { message, status, type } = e?.response?.data || {};
+      const errorNotification = {
+        duration: 0,
+        message: "Error",
+        description: "Unknown Error Message",
+      };
+      if (type === "VALIDATION_ERROR") {
+        const errors = (message as Array<any>).map(
+          (val, index) => `${val.message}`
+        );
+        notification.error({
+          ...errorNotification,
+          description: (
+            <ul className="list-decimal">
+              {errors.map((error) => (
+                <li key={error}>{error}</li>
+              ))}
+            </ul>
+          ),
+        });
+        return;
+      }
+
+      notification.error({ ...errorNotification, description: message });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  return (
+    <>
+      <Button
+        type="primary"
+        className="h-16 w-40 bg-watanasa-primary border-none shadow rounded-lg hover:bg-red-800"
+        onClick={(e) => setIsModalOpen(true)}
+      >
+        <span className="font-bold text-lg">SIGN UP</span>
+      </Button>
+      {isModalOpen && (
+        <Modal
+          open={isModalOpen}
+          title="Sign Up"
+          maskClosable={false}
+          keyboard={false}
+          closable={false}
+          onCancel={(e) => setIsModalOpen(false)}
+          footer={
+            <Spin spinning={isLoading}>
+              <Button type="text" onClick={(e) => setIsModalOpen(false)}>
+                Cancel
+              </Button>
+              <Button
+                type="primary"
+                form="form_validation"
+                htmlType="submit"
+                className="border-0 bg-watanasa-spot-1 hover:bg-red-400"
+              >
+                Sign Up
+              </Button>
+            </Spin>
+          }
+        >
+          <Spin spinning={isLoading}>
+            <Form
+              form={form}
+              name="form_validation"
+              id="form_validation"
+              layout="vertical"
+              onFinish={onFinish}
+              preserve={false}
+            >
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[{ required: true, type: "email" }]}
+              >
+                <Input type="email" placeholder="Email" />
+              </Form.Item>
+              <Form.Item
+                label="Username"
+                name="username"
+                rules={[{ required: true }]}
+              >
+                <Input placeholder="Username" />
+              </Form.Item>
+              <Form.Item
+                label="Password"
+                name="password"
+                rules={[{ required: true }]}
+              >
+                <Input.Password placeholder="Password" />
+              </Form.Item>
+            </Form>
+          </Spin>
+        </Modal>
+      )}
+    </>
+  );
+};
+
+const ButtonSignIn = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  return (
+    <>
+      <Button
+        type="ghost"
+        className="h-16 w-40 bg-white border-solid border-2 border-watanasa-primary text-watanasa-primary shadow rounded-lg hover:bg-gray-200 hover:text-watanasa-primary hover:border-watanasa-primary"
+        onClick={(e) => setIsModalOpen(true)}
+      >
+        <span className="font-bold text-lg">SIGN IN</span>
+      </Button>
+      {isModalOpen && (
+        <Modal
+          open={isModalOpen}
+          title="Sign In"
+          maskClosable={false}
+          keyboard={false}
+          closable={false}
+          onCancel={(e) => setIsModalOpen(false)}
+        >
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </Modal>
+      )}
+    </>
+  );
+};
+
 const BannerSection = () => {
   return (
     <div className="min-h-[calc(100vh-8rem)] flex flex-row items-center text-white bg-watanasa-spot-1 space-x-10 py-24 px-5 xl:px-32">
@@ -181,18 +343,8 @@ const BannerSection = () => {
               see more of it
             </div>
             <div className="flex flex-row justify-center space-x-5 lg:justify-start">
-              <Button
-                type="primary"
-                className="h-16 w-40 bg-watanasa-primary border-none shadow rounded-lg hover:bg-red-800"
-              >
-                <span className="font-bold text-lg">SIGN UP</span>
-              </Button>
-              <Button
-                type="ghost"
-                className="h-16 w-40 bg-white border border-watanasa-primary text-watanasa-primary shadow rounded-lg"
-              >
-                <span className="font-bold text-lg">SIGN IN</span>
-              </Button>
+              <ButtonSignUp />
+              <ButtonSignIn />
             </div>
           </div>
         </Col>

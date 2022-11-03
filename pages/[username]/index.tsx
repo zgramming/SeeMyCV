@@ -424,7 +424,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const params = context.params;
     const username = params?.username;
-    const response = await axios.get(`${env.BASEAPIURL}/v1/user/${username}`);
+    const response = await axios.get(`${env.BASEAPIURL}/user/${username}`);
     const {
       success,
       message,
