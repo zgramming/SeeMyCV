@@ -1,4 +1,4 @@
-import { Card, Tag, Tooltip } from "antd";
+import { Button, Card, Tag, Tooltip } from "antd";
 import axios from "axios";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
@@ -38,11 +38,21 @@ interface Props {
 }
 
 export default function Page(props: Props) {
-  const { query } = useRouter();
+  const { query, replace } = useRouter();
   if (!props.user) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center text-5xl text-white text-center bg-watanasa-accent">
-        Username {query.username} tidak ditemukan
+      <div className="min-h-screen flex flex-col justify-center items-center space-y-5 bg-watanasa-accent">
+        <div className="text-5xl text-white text-center ">
+          Username {query.username} tidak ditemukan
+        </div>
+        <Button
+          size="large"
+          type="primary"
+          className="bg-watanasa-spot-1 hover:bg-red-400 border-0"
+          onClick={(e) => replace("/")}
+        >
+          Back to Home
+        </Button>
       </div>
     );
   }
@@ -53,7 +63,11 @@ export default function Page(props: Props) {
         <title>{props.user.name}</title>
       </Head>
       <NavigationUser />
-      <ProfileSection profile={props.user.CVProfile} />
+      <ProfileSection
+        profile={props.user.CVProfile}
+        email={props.user.email}
+        name={props.user.name}
+      />
       <ExperienceSection experience={props.user.CVExperience} />
       <EducationSection education={props.user.CVEducation} />
       <SkillSection skill={props.user.CVSkill} />
@@ -67,7 +81,7 @@ export default function Page(props: Props) {
 
 const PortfolioSection = (props: { portfolio: CVPortfolioInterface[] }) => {
   return (
-    <div className="h-[calc(100vh-8rem)] flex flex-col justify-center">
+    <div className="min-h-[calc(100vh-8rem)] flex flex-col justify-center">
       <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
         <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
           PORTFOLIO
@@ -110,7 +124,7 @@ const LicenseAndCertificateSection = (props: {
   licenseCertificate: CVLicenseCertificateInterface[];
 }) => {
   return (
-    <div className="h-[calc(100vh-8rem)] flex flex-col justify-center">
+    <div className="min-h-[calc(100vh-8rem)] flex flex-col justify-center">
       <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
         <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
           LICENSE & CERTIFICATE
@@ -153,7 +167,7 @@ const LicenseAndCertificateSection = (props: {
 
 const SkillSection = (props: { skill: CVSkillInterface[] }) => {
   return (
-    <div className="h-[calc(100vh-8rem)] flex flex-col justify-center">
+    <div className="min-h-[calc(100vh-8rem)] flex flex-col justify-center">
       <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
         <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
           SKILL
@@ -185,7 +199,7 @@ const SkillSection = (props: { skill: CVSkillInterface[] }) => {
 
 const EducationSection = (props: { education: CVEducationInterface[] }) => {
   return (
-    <div className="h-[calc(100vh-8rem)] flex flex-col justify-center">
+    <div className="min-h-[calc(100vh-8rem)] flex flex-col justify-center">
       <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
         <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
           EDUCATION
@@ -243,7 +257,7 @@ const EducationSection = (props: { education: CVEducationInterface[] }) => {
 
 const ExperienceSection = (props: { experience: CVExperienceInterface[] }) => {
   return (
-    <div className="h-[calc(100vh-8rem)] flex flex-col justify-center">
+    <div className="min-h-[calc(100vh-8rem)] flex flex-col justify-center">
       <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
         <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
           EXPERIENCE
@@ -282,20 +296,10 @@ const ExperienceSection = (props: { experience: CVExperienceInterface[] }) => {
                         {calculating}
                       </div>
                     </div>
-                    <div className="text-justify font-light">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Corrupti, facilis asperiores? Veniam ratione quas rerum,
-                      earum ipsam fugit quasi odio est provident illum
-                      temporibus officiis modi sit placeat aliquid cumque. Lorem
-                      ipsum dolor sit amet consectetur adipisicing elit. Quod
-                      pariatur voluptatem architecto placeat dolorum laudantium
-                      fugit quae quas dignissimos debitis delectus aliquam est
-                      eum rem, illum dolorem itaque ipsa molestiae. Lorem ipsum
-                      dolor sit amet consectetur adipisicing elit. Ipsa ea
-                      doloribus voluptas totam cum amet quaerat nulla id earum
-                      cumque libero explicabo expedita temporibus, labore vel
-                      obcaecati alias consectetur tempora?
-                    </div>
+                    <div
+                      className="text-justify font-light"
+                      dangerouslySetInnerHTML={{ __html: val.description }}
+                    ></div>
                     <div className="flex flex-row flex-wrap gap-2">
                       {tags &&
                         tags.map((val, index) => {
@@ -317,14 +321,18 @@ const ExperienceSection = (props: { experience: CVExperienceInterface[] }) => {
   );
 };
 
-const ProfileSection = (props: { profile: CVProfileInterface }) => {
+const ProfileSection = (props: {
+  profile: CVProfileInterface;
+  name: string;
+  email: string;
+}) => {
   return (
     <div className="h-[calc(100vh-8rem)] flex flex-col justify-center">
       <div
         className={`h-full flex flex-col justify-center items-center pb-24 px-5 md:px-12 lg:px-24 xl:px-80`}
       >
         <div className="font-poppins font-bold text-center text-5xl tracking-widest pb-6">
-          {props.profile.name.toUpperCase()}
+          {props.name.toUpperCase()}
         </div>
         <div className="font-normal text-2xl text-center tracking-widest pb-10">
           {props.profile.motto}
@@ -337,14 +345,14 @@ const ProfileSection = (props: { profile: CVProfileInterface }) => {
         <div
           className={`flex flex-row flex-wrap justify-center gap-10 text-watanasa-shade-4 py-8 px-5 md:px-12 lg:px-24 xl:px-80`}
         >
-          {props.profile.email && (
+          {props.email && (
             <Tooltip title="Email" className="hover:cursor-pointer">
               <FontAwesomeIcon
                 icon={faEnvelope}
                 className="h-8 w-8"
                 onClick={(e) => {
                   window.open(
-                    `https://mail.google.com/mail/?view=cm&fs=1&to=${props.profile.email}`
+                    `https://mail.google.com/mail/?view=cm&fs=1&to=${props.email}`
                   );
                 }}
               />

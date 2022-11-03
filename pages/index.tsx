@@ -1,7 +1,9 @@
 import { Button, Col, Form, Input, Modal, notification, Row, Spin } from "antd";
+import Search from "antd/lib/input/Search";
 import axios from "axios";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 import BG1 from "../public/images/bg_index_1.png";
@@ -12,15 +14,9 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>See My CV</title>
+        <title>SeeMyCV</title>
       </Head>
-      <div
-        className={`sticky top-0 z-50 h-32 bg-watanasa-scaffold mx-auto shadow px-5 md:px-12 lg:px-24 xl:px-80`}
-      >
-        <div className="h-full flex flex-col justify-center items-center text-4xl font-poppins font-bold tracking-widest">
-          SeeMyCV
-        </div>
-      </div>
+      <NavbarIndex />
       <BannerSection />
       <FCCSection />
       <CreatePreviewSection />
@@ -28,6 +24,29 @@ export default function Home() {
     </>
   );
 }
+
+const NavbarIndex = () => {
+  const { push } = useRouter();
+  return (
+    <div
+      className={`sticky top-0 z-50 h-32 bg-watanasa-scaffold mx-auto shadow px-5 md:px-12 lg:px-24 xl:px-80`}
+    >
+      <div className="h-full flex flex-col justify-center">
+        <div className="flex flex-row items-center justify-between">
+          <div className="text-4xl font-poppins font-bold tracking-widest">
+            SeeMyCV
+          </div>
+          <div>
+            <Search
+              placeholder="Cari username"
+              onSearch={(e) => push(`/${e}`)}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const FooterSection = () => {
   return (
@@ -306,24 +325,10 @@ const ButtonSignIn = () => {
       <Button
         type="ghost"
         className="h-16 w-40 bg-white border-solid border-2 border-watanasa-primary text-watanasa-primary shadow rounded-lg hover:bg-gray-200 hover:text-watanasa-primary hover:border-watanasa-primary"
-        onClick={(e) => setIsModalOpen(true)}
+        onClick={(e) => window.open(process.env.NEXT_PUBLIC_WEBADMINURL)}
       >
         <span className="font-bold text-lg">SIGN IN</span>
       </Button>
-      {isModalOpen && (
-        <Modal
-          open={isModalOpen}
-          title="Sign In"
-          maskClosable={false}
-          keyboard={false}
-          closable={false}
-          onCancel={(e) => setIsModalOpen(false)}
-        >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
-      )}
     </>
   );
 };
