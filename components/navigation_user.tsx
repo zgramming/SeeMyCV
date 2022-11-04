@@ -1,14 +1,16 @@
 import { Drawer } from "antd";
+import { observer } from "mobx-react-lite";
 import { useState } from "react";
 
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-interface NavigationMenu {
-  code: string;
-  name: string;
-}
-const menus: NavigationMenu[] = [
+import { NavigationMenuInterface } from "../interface/navigation_menu";
+import activeNavigationBar, {
+  ActiveNavigationBarStore,
+} from "../repository/active_navigationbar";
+
+const menus: NavigationMenuInterface[] = [
   { code: "experience", name: "Experience" },
   { code: "education", name: "Education" },
   { code: "skill", name: "Skill" },
@@ -32,7 +34,11 @@ const NavigationUser = () => {
           <div className="hidden lg:block">
             <div className="flex flex-wrap space-x-10 list-none font-poppins tracking-widest">
               {menus.map((val) => (
-                <span key={val.code}>{val.name}</span>
+                <NavigationUserItem
+                  key={val.code}
+                  item={val}
+                  store={activeNavigationBar}
+                />
               ))}
             </div>
           </div>
@@ -42,7 +48,30 @@ const NavigationUser = () => {
   );
 };
 
-const NavigationDrawerCustom = (props: { menus: NavigationMenu[] }) => {
+const NavigationUserItem = observer(
+  (props: {
+    item: NavigationMenuInterface;
+    store: ActiveNavigationBarStore;
+  }) => {
+    const item = props.item;
+    const isActive = props.store.activeMenuCode === item.code;
+    return (
+      <>
+        {isActive ? (
+          <span className="font-bold underline" key={item.code}>
+            {item.name}
+          </span>
+        ) : (
+          <span key={item.code}>{item.name}</span>
+        )}
+      </>
+    );
+  }
+);
+
+const NavigationDrawerCustom = (props: {
+  menus: NavigationMenuInterface[];
+}) => {
   const [open, setOpen] = useState(false);
 
   return (
