@@ -327,10 +327,8 @@ const ProfileSection = (props: {
   email: string;
 }) => {
   return (
-    <div className="h-[calc(100vh-8rem)] flex flex-col justify-center">
-      <div
-        className={`h-full flex flex-col justify-center items-center pb-24 px-5 md:px-12 lg:px-24 xl:px-80`}
-      >
+    <div className="min-h-[calc(100vh-8rem)] flex flex-col">
+      <div className="flex flex-col px-5 pt-24 md:px-12 lg:px-24 xl:px-80 mb-auto">
         <div className="font-poppins font-bold text-center text-5xl tracking-widest pb-6">
           {props.name.toUpperCase()}
         </div>
@@ -341,7 +339,7 @@ const ProfileSection = (props: {
           {props.profile.description}
         </div>
       </div>
-      <div className="flex flex-col items-center bg-watanasa-spot-1">
+      <div className="flex flex-col items-center bg-watanasa-spot-1 ">
         <div
           className={`flex flex-row flex-wrap justify-center gap-10 text-watanasa-shade-4 py-8 px-5 md:px-12 lg:px-24 xl:px-80`}
         >
