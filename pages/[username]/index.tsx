@@ -6,8 +6,14 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { parse } from "path";
 import { env } from "process";
+import { useState } from "react";
+import { animated, useSpring } from "react-spring";
 
-import { FileImageOutlined, FilePdfOutlined } from "@ant-design/icons";
+import {
+  EyeOutlined,
+  FileImageOutlined,
+  FilePdfOutlined,
+} from "@ant-design/icons";
 import {
   faGithub,
   faInstagram,
@@ -79,6 +85,47 @@ export default function Page(props: Props) {
   );
 }
 
+const PortfolioSectionItem = (props: { portfolio: CVPortfolioInterface }) => {
+  const [isShowMenu, setIsShowMenu] = useState(false);
+  const springProps = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: isShowMenu ? 1 : 0 },
+  });
+
+  const portfolio = props.portfolio;
+  return (
+    <Card
+      bodyStyle={{ padding: 0, margin: 0 }}
+      style={{
+        padding: 0,
+        margin: 0,
+      }}
+      className="hover:cursor-pointer"
+      onMouseEnter={(e) => setIsShowMenu(true)}
+      onMouseLeave={(e) => setIsShowMenu(false)}
+    >
+      <div className="w-full h-80 ">
+        <Image src={`${portfolio.thumbnail}`} alt="Image Portfolio" fill />
+      </div>
+      <animated.div
+        style={springProps}
+        className="absolute bottom-0 left-0 right-0 top-0 bg-watanasa-spot-1 flex flex-col justify-center items-center"
+      >
+        <EyeOutlined className="text-4xl text-white" />
+      </animated.div>
+
+      <animated.div
+        style={springProps}
+        className="absolute bottom-0 left-0 right-0 bg-black/25 px-5 py-2 "
+      >
+        <div className="text-center font-semibold text-white line-clamp-2">
+          {portfolio.title}
+        </div>
+      </animated.div>
+    </Card>
+  );
+};
+
 const PortfolioSection = (props: { portfolio: CVPortfolioInterface[] }) => {
   return (
     <div className="min-h-[calc(100vh-8rem)] flex flex-col justify-center">
@@ -86,33 +133,9 @@ const PortfolioSection = (props: { portfolio: CVPortfolioInterface[] }) => {
         <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
           PORTFOLIO
         </div>
-        <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
           {props.portfolio.map((val, index) => {
-            return (
-              <Card
-                key={val.id}
-                bodyStyle={{ padding: 0, margin: 0 }}
-                style={{
-                  padding: 0,
-                  margin: 0,
-                }}
-              >
-                <div>
-                  <div className="relative w-full h-40 md:h-80 xl:h-52 ">
-                    <Image
-                      src={`${val.thumbnail}`}
-                      alt="Image Portfolio"
-                      fill
-                    />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-black/25 px-5 py-2 ">
-                    <div className="text-center font-semibold text-white line-clamp-2">
-                      {val.title}
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            );
+            return <PortfolioSectionItem key={val.id} portfolio={val} />;
           })}
         </div>
       </div>
@@ -132,16 +155,30 @@ const LicenseAndCertificateSection = (props: {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
           {props.licenseCertificate.map((val, index) => {
             const { ext } = parse(val.file ?? "");
+            const startDate = new Date(val.start_date);
+            const endDate = val.end_date && new Date(val.end_date);
             return (
               <Card key={val.id} className="bg-watanasa-scaffold shadow">
                 <div className="flex flex-col space-y-2">
                   <div className="font-bold font-poppins tracking-widest text-xl">
-                    Menjadi Flutter Developer Expert (MFDE) 2019
+                    {val.name}
                   </div>
-                  <div className="text-base">Dicoding</div>
+                  <div className="text-base">{val.publisher}</div>
                   <div className="flex flex-row items-center space-x-2">
                     <FontAwesomeIcon icon={faCalendar} />
-                    <div className="text-sm">Juni 2014 - Juni 2017</div>
+                    <div className="text-sm">
+                      {startDate.toLocaleDateString("id-ID", {
+                        month: "long",
+                        year: "numeric",
+                      })}{" "}
+                      -{" "}
+                      {endDate
+                        ? endDate.toLocaleDateString("id-ID", {
+                            month: "long",
+                            year: "numeric",
+                          })
+                        : "No Expiration"}
+                    </div>
                   </div>
                   <div className="font-light">Kredensial : AXXXX5ABC</div>
                   <div>
