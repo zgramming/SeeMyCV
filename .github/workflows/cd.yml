@@ -27,10 +27,6 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            echo "Running APT Update"
-            sudo apt update -y
-            echo "Running APT Upgrade"
-            sudo apt upgrade -y
             echo "CD to folder project"
             cd /var/www/seemycv
             echo "Reset Git to the latest commit"
