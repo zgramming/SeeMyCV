@@ -9,6 +9,7 @@ import { NavigationMenuInterface } from "../interface/navigation_menu";
 import activeNavigationBar, {
   ActiveNavigationBarStore,
 } from "../repository/active_navigationbar";
+import { useRouter } from "next/router";
 
 const menus: NavigationMenuInterface[] = [
   { code: "experience", name: "Experience" },
@@ -19,13 +20,17 @@ const menus: NavigationMenuInterface[] = [
 ];
 
 const NavigationUser = () => {
+  const { push } = useRouter();
   return (
     <div
       className={`sticky top-0 z-50 h-32  bg-watanasa-scaffold mx-auto shadow-lg px-5 md:px-12 lg:px-24 xl:px-80`}
     >
       <div className="h-full flex flex-col justify-center">
         <div className="flex flex-row items-center justify-between">
-          <div className="font-bold font-poppins text-2xl tracking-widest">
+          <div
+            className="font-bold font-poppins text-2xl tracking-widest hover:cursor-pointer"
+            onClick={(e) => push("/")}
+          >
             SeeMyCV
           </div>
           <div className="block lg:hidden ">
