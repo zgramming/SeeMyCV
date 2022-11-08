@@ -63,7 +63,7 @@ const CreatePreviewSection = () => {
         <Col
           md={24}
           lg={10}
-          className="w-96 lg:w-full order-2 lg:order-1 pt-10 lg:pt-0"
+          className="w-full lg:w-full order-2 lg:order-1 pt-10 lg:pt-0"
         >
           <div className="flex flex-col space-y-5">
             <div className="font-poppins font-bold text-4xl tracking-widest">
