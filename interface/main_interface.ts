@@ -18,7 +18,7 @@ export interface Users {
   created_by?: any;
   updated_by?: any;
   CVSkill: CVSkillInterface[];
-  CVProfile: CVProfileInterface;
+  CVProfile?: CVProfileInterface;
   CVPortfolio: CVPortfolioInterface[];
   CVLicenseCertificate: CVLicenseCertificateInterface[];
   CVExperience: CVExperienceInterface[];
