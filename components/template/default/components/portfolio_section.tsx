@@ -1,9 +1,11 @@
-import { EyeOutlined } from "@ant-design/icons";
 import { Card } from "antd";
 import Image from "next/image";
-import { useState } from "react";
-import { useSpring, animated } from "react-spring";
+import { forwardRef, useState } from "react";
+import { animated, useSpring } from "react-spring";
 import { Waypoint } from "react-waypoint";
+
+import { EyeOutlined } from "@ant-design/icons";
+
 import { CVPortfolioInterface } from "../../../../interface/cv/cvportfolio_interface";
 import activeNavigationBarStore from "../../../../repository/active_navigationbar";
 
@@ -48,28 +50,34 @@ const PortfolioSectionItem = (props: { portfolio: CVPortfolioInterface }) => {
   );
 };
 
-const PortfolioSection = (props: { portfolio: CVPortfolioInterface[] }) => {
+const PortfolioSection = forwardRef<
+  HTMLDivElement,
+  { portfolio: CVPortfolioInterface[] }
+>((props, ref) => {
   return (
-    <Waypoint
-      onEnter={(e) => activeNavigationBarStore.setActiveMenu("portfolio")}
-      onLeave={(e) => ""}
-      bottomOffset={"50%"}
-      topOffset={"20%"}
-    >
-      <div className="min-h-[calc(100vh-8rem)] flex flex-col justify-center">
-        <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
-          <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
-            PORTFOLIO
-          </div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {props.portfolio.map((val, index) => {
-              return <PortfolioSectionItem key={val.id} portfolio={val} />;
-            })}
+    <div ref={ref}>
+      <Waypoint
+        onEnter={(e) => activeNavigationBarStore.setActiveMenu("portfolio")}
+        onLeave={(e) => ""}
+        bottomOffset={"50%"}
+        topOffset={"20%"}
+      >
+        <div className="min-h-[calc(100vh-8rem)] flex flex-col justify-center">
+          <div className={`flex flex-col px-5 md:px-12 lg:px-24 xl:px-80`}>
+            <div className="font-bold font-poppins text-5xl text-center tracking-widest py-24">
+              PORTFOLIO
+            </div>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {props.portfolio.map((val, index) => {
+                return <PortfolioSectionItem key={val.id} portfolio={val} />;
+              })}
+            </div>
           </div>
         </div>
-      </div>
-    </Waypoint>
+      </Waypoint>
+    </div>
   );
-};
+});
 
+PortfolioSection.displayName = "Portfolio Section";
 export default PortfolioSection;

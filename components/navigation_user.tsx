@@ -1,5 +1,6 @@
 import { Drawer } from "antd";
 import { observer } from "mobx-react-lite";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 import { faBars } from "@fortawesome/free-solid-svg-icons";
@@ -9,7 +10,9 @@ import { NavigationMenuInterface } from "../interface/navigation_menu";
 import activeNavigationBar, {
   ActiveNavigationBarStore,
 } from "../repository/active_navigationbar";
-import { useRouter } from "next/router";
+import navigationScrollToComponent, {
+  NavigationScrollToComponent,
+} from "../repository/navigation_scrollto_component";
 
 const menus: NavigationMenuInterface[] = [
   { code: "experience", name: "Experience" },
@@ -19,20 +22,33 @@ const menus: NavigationMenuInterface[] = [
   { code: "portfolio", name: "Portfolio" },
 ];
 
+const LogoWebsite = observer(
+  ({
+    storeNavigationScrollTo,
+  }: {
+    storeNavigationScrollTo: NavigationScrollToComponent;
+  }) => {
+    const { push } = useRouter();
+
+    return (
+      <div
+        className="font-bold font-poppins text-2xl tracking-widest hover:cursor-pointer"
+        onClick={(e) => storeNavigationScrollTo.scrollTo("profile")}
+      >
+        SeeMyCV
+      </div>
+    );
+  }
+);
+
 const NavigationUser = () => {
-  const { push } = useRouter();
   return (
     <div
       className={`sticky top-0 z-50 h-32  bg-watanasa-scaffold mx-auto shadow-lg px-5 md:px-12 lg:px-24 xl:px-80`}
     >
       <div className="h-full flex flex-col justify-center">
         <div className="flex flex-row items-center justify-between">
-          <div
-            className="font-bold font-poppins text-2xl tracking-widest hover:cursor-pointer"
-            onClick={(e) => push("/")}
-          >
-            SeeMyCV
-          </div>
+          <LogoWebsite storeNavigationScrollTo={navigationScrollToComponent} />
           <div className="block lg:hidden ">
             <NavigationDrawerCustom menus={menus} />
           </div>
@@ -42,7 +58,8 @@ const NavigationUser = () => {
                 <NavigationUserItem
                   key={val.code}
                   item={val}
-                  store={activeNavigationBar}
+                  storeActiveNavigation={activeNavigationBar}
+                  storeNavigationScrollTo={navigationScrollToComponent}
                 />
               ))}
             </div>
@@ -54,14 +71,21 @@ const NavigationUser = () => {
 };
 
 const NavigationUserItem = observer(
-  (props: {
+  ({
+    item,
+    storeActiveNavigation,
+    storeNavigationScrollTo,
+  }: {
     item: NavigationMenuInterface;
-    store: ActiveNavigationBarStore;
+    storeActiveNavigation: ActiveNavigationBarStore;
+    storeNavigationScrollTo: NavigationScrollToComponent;
   }) => {
-    const item = props.item;
-    const isActive = props.store.activeMenuCode === item.code;
+    const isActive = storeActiveNavigation.activeMenuCode === item.code;
     return (
-      <>
+      <div
+        onClick={(e) => storeNavigationScrollTo.scrollTo(item.code)}
+        className="hover:cursor-pointer"
+      >
         {isActive ? (
           <span className="font-bold underline" key={item.code}>
             {item.name}
@@ -69,7 +93,7 @@ const NavigationUserItem = observer(
         ) : (
           <span key={item.code}>{item.name}</span>
         )}
-      </>
+      </div>
     );
   }
 );
