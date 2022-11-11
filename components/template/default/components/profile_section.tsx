@@ -41,9 +41,9 @@ const ProfileSection = forwardRef<
               {props.profile?.description}
             </div>
           </div>
-          <div className="flex flex-col items-center bg-watanasa-spot-1 ">
+          <div className="flex flex-col items-center bg-default-spot-1 ">
             <div
-              className={`flex flex-row flex-wrap justify-center gap-10 text-watanasa-shade-4 py-8 px-5 md:px-12 lg:px-24 xl:px-80`}
+              className={`flex flex-row flex-wrap justify-center gap-10 text-default-shade-4 py-8 px-5 md:px-12 lg:px-24 xl:px-80`}
             >
               {props.email && (
                 <Tooltip title="Email" className="hover:cursor-pointer">

@@ -44,7 +44,7 @@ const DefaultTemplateWebsite = ({ user }: { user: Users }) => {
   }, []);
 
   return (
-    <div className="font-josefin-sans bg-watanasa-scaffold">
+    <div className="font-josefin-sans bg-default-scaffold">
       <DefaultTemplateNavbar />
 
       <ProfileSection

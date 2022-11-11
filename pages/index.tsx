@@ -10,26 +10,11 @@ import BG1 from "../public/images/bg_index_1.png";
 import BG2 from "../public/images/bg_index_2.png";
 import BG3 from "../public/images/bg_index_3.png";
 
-export default function Home() {
-  return (
-    <>
-      <Head>
-        <title>SeeMyCV</title>
-      </Head>
-      <NavbarIndex />
-      <BannerSection />
-      <FCCSection />
-      <CreatePreviewSection />
-      <FooterSection />
-    </>
-  );
-}
-
 const NavbarIndex = () => {
   const { push } = useRouter();
   return (
     <div
-      className={`sticky top-0 z-50 h-32 bg-watanasa-scaffold mx-auto shadow px-5 md:px-12 lg:px-24 xl:px-80`}
+      className={`sticky top-0 z-50 h-32 bg-default-scaffold mx-auto shadow px-5 md:px-12 lg:px-24 xl:px-80`}
     >
       <div className="h-full flex flex-col justify-center">
         <div className="flex flex-row items-center justify-between">
@@ -50,7 +35,7 @@ const NavbarIndex = () => {
 
 const FooterSection = () => {
   return (
-    <div className="h-24 flex flex-col justify-center items-center bg-watanasa-spot-1 text-white text-xl font-bold p-5">
+    <div className="h-24 flex flex-col justify-center items-center bg-default-spot-1 text-white text-xl font-bold p-5">
       See My CV | All Right Reserved
     </div>
   );
@@ -83,7 +68,7 @@ const CreatePreviewSection = () => {
               <Button
                 type="primary"
                 size="large"
-                className="bg-watanasa-spot-1 border-0 shadow rounded-xl mb-5 hover:bg-watanasa-spot-2"
+                className="bg-default-spot-1 border-0 shadow rounded-xl mb-5 hover:bg-default-spot-2"
               >
                 Preview Website
               </Button>
@@ -91,7 +76,7 @@ const CreatePreviewSection = () => {
               <Button
                 type="primary"
                 size="large"
-                className="bg-watanasa-spot-1 border-0 shadow rounded-xl mb-5 hover:bg-watanasa-spot-2"
+                className="bg-default-spot-1 border-0 shadow rounded-xl mb-5 hover:bg-default-spot-2"
               >
                 Preview PDF
               </Button>
@@ -140,42 +125,42 @@ const FCCSection = () => {
               <Button
                 type="primary"
                 size="large"
-                className="bg-watanasa-spot-1 border-0 shadow rounded-xl mb-5 hover:bg-watanasa-spot-2"
+                className="bg-default-spot-1 border-0 shadow rounded-xl mb-5 hover:bg-default-spot-2"
               >
                 Profile
               </Button>
               <Button
                 type="primary"
                 size="large"
-                className="bg-watanasa-spot-1 border-0 shadow rounded-xl mb-5 hover:bg-watanasa-spot-2"
+                className="bg-default-spot-1 border-0 shadow rounded-xl mb-5 hover:bg-default-spot-2"
               >
                 Experience
               </Button>
               <Button
                 type="primary"
                 size="large"
-                className="bg-watanasa-spot-1 border-0 shadow rounded-xl mb-5 hover:bg-watanasa-spot-2"
+                className="bg-default-spot-1 border-0 shadow rounded-xl mb-5 hover:bg-default-spot-2"
               >
                 Education
               </Button>
               <Button
                 type="primary"
                 size="large"
-                className="bg-watanasa-spot-1 border-0 shadow rounded-xl mb-5 hover:bg-watanasa-spot-2"
+                className="bg-default-spot-1 border-0 shadow rounded-xl mb-5 hover:bg-default-spot-2"
               >
                 Skill
               </Button>
               <Button
                 type="primary"
                 size="large"
-                className="bg-watanasa-spot-1 border-0 shadow rounded-xl mb-5 hover:bg-watanasa-spot-2"
+                className="bg-default-spot-1 border-0 shadow rounded-xl mb-5 hover:bg-default-spot-2"
               >
                 L & C
               </Button>
               <Button
                 type="primary"
                 size="large"
-                className="bg-watanasa-spot-1 border-0 shadow rounded-xl mb-5 hover:bg-watanasa-spot-2"
+                className="bg-default-spot-1 border-0 shadow rounded-xl mb-5 hover:bg-default-spot-2"
               >
                 Portfolio
               </Button>
@@ -250,7 +235,7 @@ const ButtonSignUp = () => {
     <>
       <Button
         type="primary"
-        className="h-16 w-40 bg-watanasa-primary border-none shadow rounded-lg hover:bg-red-800"
+        className="h-16 w-40 bg-default-primary border-none shadow rounded-lg hover:bg-red-800"
         onClick={(e) => setIsModalOpen(true)}
       >
         <span className="font-bold text-lg">SIGN UP</span>
@@ -272,7 +257,7 @@ const ButtonSignUp = () => {
                 type="primary"
                 form="form_validation"
                 htmlType="submit"
-                className="border-0 bg-watanasa-spot-1 hover:bg-red-400"
+                className="border-0 bg-default-spot-1 hover:bg-red-400"
               >
                 Sign Up
               </Button>
@@ -324,7 +309,7 @@ const ButtonSignIn = () => {
     <>
       <Button
         type="ghost"
-        className="h-16 w-40 bg-white border-solid border-2 border-watanasa-primary text-watanasa-primary shadow rounded-lg hover:bg-gray-200 hover:text-watanasa-primary hover:border-watanasa-primary"
+        className="h-16 w-40 bg-white border-solid border-2 border-default-primary text-default-primary shadow rounded-lg hover:bg-gray-200 hover:text-default-primary hover:border-default-primary"
         onClick={(e) => window.open(process.env.NEXT_PUBLIC_WEBADMINURL)}
       >
         <span className="font-bold text-lg">SIGN IN</span>
@@ -335,7 +320,7 @@ const ButtonSignIn = () => {
 
 const BannerSection = () => {
   return (
-    <div className="min-h-[calc(100vh-8rem)] flex flex-row items-center text-white bg-watanasa-spot-1 space-x-10 py-24 px-5 xl:px-32">
+    <div className="min-h-[calc(100vh-8rem)] flex flex-row items-center text-white bg-default-spot-1 space-x-10 py-24 px-5 xl:px-32">
       <Row align="middle">
         <Col md={24} lg={12} className="w-full order-2 lg:order-1">
           <div className="flex flex-col space-y-10">
@@ -367,3 +352,20 @@ const BannerSection = () => {
     </div>
   );
 };
+
+export default function Home() {
+  return (
+    <>
+      <Head>
+        <title>SeeMyCV</title>
+      </Head>
+      <div className="font-josefin-sans">
+        <NavbarIndex />
+        <BannerSection />
+        <FCCSection />
+        <CreatePreviewSection />
+        <FooterSection />
+      </div>
+    </>
+  );
+}

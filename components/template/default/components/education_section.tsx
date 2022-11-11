@@ -31,7 +31,7 @@ const EducationSection = forwardRef<
                 const startDate = new Date(val.start_date);
                 const endDate = val.end_date && new Date(val.end_date);
                 return (
-                  <Card key={val.id} className="bg-watanasa-scaffold shadow">
+                  <Card key={val.id} className="bg-default-scaffold shadow">
                     <div className="flex flex-row items-start space-x-5">
                       <Image
                         src={`${val.image}`}

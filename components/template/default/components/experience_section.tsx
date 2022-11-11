@@ -37,7 +37,7 @@ const ExperienceSection = forwardRef<
                 );
                 const tags = val.tags && (JSON.parse(val.tags) as string[]);
                 return (
-                  <Card key={val.id} className="bg-watanasa-scaffold shadow">
+                  <Card key={val.id} className="bg-default-scaffold shadow">
                     <div className="flex flex-row items-start space-x-5">
                       <div className="hidden md:block">
                         <Image

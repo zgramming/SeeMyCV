@@ -4,6 +4,7 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { env } from "process";
+import WatanasaTemplate from "../../components/template/1_watanasa/watanasa_template";
 
 import DefaultTemplateWebsite from "../../components/template/default/default_template_website";
 import { Users } from "../../interface/main_interface";
@@ -37,7 +38,8 @@ const Page = (props: Props) => {
       <Head>
         <title>{props.user.name}</title>
       </Head>
-      <DefaultTemplateWebsite user={props.user} />
+      {/* <DefaultTemplateWebsite user={props.user} /> */}
+      <WatanasaTemplate />
     </>
   );
 };

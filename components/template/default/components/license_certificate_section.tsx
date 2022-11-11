@@ -33,7 +33,7 @@ const LicenseAndCertificateSection = forwardRef<
                 const startDate = new Date(val.start_date);
                 const endDate = val.end_date && new Date(val.end_date);
                 return (
-                  <Card key={val.id} className="bg-watanasa-scaffold shadow">
+                  <Card key={val.id} className="bg-default-scaffold shadow">
                     <div className="flex flex-col space-y-2">
                       <div className="font-bold font-poppins tracking-widest text-xl">
                         {val.name}
