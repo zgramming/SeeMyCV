@@ -5,7 +5,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { env } from "process";
 
-import NavigationUser from "../../components/navigation_user";
 import DefaultTemplateWebsite from "../../components/template/default/default_template_website";
 import { Users } from "../../interface/main_interface";
 
@@ -38,7 +37,6 @@ const Page = (props: Props) => {
       <Head>
         <title>{props.user.name}</title>
       </Head>
-      <NavigationUser />
       <DefaultTemplateWebsite user={props.user} />
     </>
   );

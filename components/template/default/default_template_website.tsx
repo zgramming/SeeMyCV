@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 
 import { Users } from "../../../interface/main_interface";
 import navigationScrollToComponent from "../../../repository/navigation_scrollto_component";
+import DefaultTemplateNavbar from "./components/navigationbar";
 import EducationSection from "./components/education_section";
 import ExperienceSection from "./components/experience_section";
 import LicenseAndCertificateSection from "./components/license_certificate_section";
@@ -43,7 +44,9 @@ const DefaultTemplateWebsite = ({ user }: { user: Users }) => {
   }, []);
 
   return (
-    <>
+    <div className="font-josefin-sans bg-watanasa-scaffold">
+      <DefaultTemplateNavbar />
+
       <ProfileSection
         ref={profileRef}
         profile={user.CVProfile}
@@ -58,7 +61,7 @@ const DefaultTemplateWebsite = ({ user }: { user: Users }) => {
         licenseCertificate={user.CVLicenseCertificate}
       />
       <PortfolioSection ref={portfolioRef} portfolio={user.CVPortfolio} />
-    </>
+    </div>
   );
 };
 
