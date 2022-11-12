@@ -16,7 +16,7 @@ interface Props {
 const chooseTemplate = (codeTemplate: string) => {};
 
 const Page = (props: Props) => {
-  const { query, replace } = useRouter();
+  const { query, replace, asPath } = useRouter();
   if (!props.user) {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center space-y-5 bg-watanasa-accent">
@@ -35,11 +35,25 @@ const Page = (props: Props) => {
     );
   }
 
+  const { CVProfile, name, username } = props.user;
+  const url = `${process.env.NEXT_PUBLIC_BASEURL}/${username}`;
+  const imageUrl = `${process.env.NEXT_PUBLIC_BASEURL}/images/logo_primary.png`;
+
   return (
     <>
       <Head>
-        <title>{props.user.name}</title>
+        <title>{name}</title>
+        <meta name="description" content={CVProfile?.description} />
+        <meta property="og:title" content={name} />
+        <meta property="og:type" content={CVProfile?.motto} />
+        <meta property="og:url" content={url} />
+        <meta property="og:image:url" content={imageUrl} />
+        <meta property="og:image:width" content="400" />
+        <meta property="og:image:height" content="400" />
+        <meta property="og:image:alt" content="SeeMyCV" />
+        <meta property="og:description" content={CVProfile?.description} />
       </Head>
+
       {/* <DefaultTemplateWebsite user={props.user} /> */}
       <WatanasaTemplate user={props.user} />
     </>
@@ -58,7 +72,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       message,
       data,
     }: { success: boolean; message: string; data: Users } = response.data;
-    console.log({ data });
+
     return {
       props: {
         user: data,
