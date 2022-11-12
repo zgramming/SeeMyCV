@@ -1,12 +1,17 @@
 import { Button, Card } from "antd";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useState } from "react";
+
+import { WarningOutlined } from "@ant-design/icons";
 
 import { CVPortfolioInterface } from "../../../../interface/cv/cvportfolio_interface";
 import BGGradient from "../../../../public/template/watanasa/bg_gradient.png";
 
 const PortfolioItem = ({ portfolio }: { portfolio: CVPortfolioInterface }) => {
   const { push, query } = useRouter();
+  const [isImageError, setIsImageError] = useState(false);
+
   const { username } = query;
   return (
     <Card
@@ -18,31 +23,40 @@ const PortfolioItem = ({ portfolio }: { portfolio: CVPortfolioInterface }) => {
         padding: 0,
         margin: 0,
       }}
-      className="shadow rounded-xl"
+      className="shadow rounded-xl bg-watanasa-primary-900"
       onClick={(e) => push(`/${username}/portfolio/${portfolio.slug}`)}
       hoverable
     >
-      <div className="relative h-72">
-        <Image
-          alt="Image Portfolio"
-          src={portfolio.thumbnail ?? BGGradient}
-          className={`rounded-tl-xl rounded-tr-xl border-none`}
-          style={{ objectFit: "cover" }}
-          fill
-        />
-      </div>
-      <div className="flex flex-col bg-watanasa-primary-900 text-white space-y-5 rounded-br-xl rounded-bl-xl p-5">
-        <div className="font-semibold text-xl line-clamp-2">
-          {portfolio.title}
+      <div className="flex flex-col">
+        <div className="relative h-72">
+          {!isImageError ? (
+            <Image
+              alt="Image Portfolio"
+              src={portfolio.thumbnail ?? BGGradient}
+              className={`rounded-tl-xl rounded-tr-xl border-none`}
+              style={{ objectFit: "cover" }}
+              onError={(e) => setIsImageError(true)}
+              fill
+            />
+          ) : (
+            <div className="flex flex-col items-center justify-center h-full">
+              <WarningOutlined className="text-4xl text-white" />
+            </div>
+          )}
         </div>
-        <div
-          className="font-light text-xs line-clamp-2"
-          dangerouslySetInnerHTML={{ __html: portfolio.description }}
-        />
-        <div className="flex justify-start">
-          <Button type="primary" className="rounded-lg">
-            View Project
-          </Button>
+        <div className="flex flex-col text-white space-y-5 rounded-br-xl rounded-bl-xl p-5">
+          <div className="font-semibold text-xl line-clamp-2">
+            {portfolio.title}
+          </div>
+          <div
+            className="h-12 font-light text-xs overflow-y-clip"
+            dangerouslySetInnerHTML={{ __html: portfolio.description }}
+          />
+          <div className="flex justify-start">
+            <Button type="primary" className="rounded-lg">
+              View Project
+            </Button>
+          </div>
         </div>
       </div>
     </Card>

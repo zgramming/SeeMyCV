@@ -71,7 +71,7 @@ const ProfileContent = ({
       <div className="text-4xl font-bold lg:text-5xl xl:text-6xl">
         <span className="text-watanasa-primary-500">{name}</span>
       </div>
-      <div className="text-watanasa-gray-3 text-sm font-light lg:text-base">
+      <div className="text-watanasa-gray-3 text-sm font-light tracking-widest leading-none lg:text-base">
         {profile?.description}
       </div>
       <div className="flex flex-wrap space-x-5">

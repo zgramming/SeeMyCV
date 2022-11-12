@@ -2,7 +2,11 @@ import { Button, Card, Col, Modal, Row, Tag } from "antd";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-import { ArrowRightOutlined, CalendarOutlined } from "@ant-design/icons";
+import {
+  ArrowRightOutlined,
+  CalendarOutlined,
+  WarningOutlined,
+} from "@ant-design/icons";
 
 import { CVExperienceInterface } from "../../../../interface/cv/cvexperience_interface";
 import { calculatingExperience, dateToyMd } from "../../../../utils/function";
@@ -29,6 +33,7 @@ const ExperienceItem = ({
   experience: CVExperienceInterface;
 }) => {
   const [tags, setTags] = useState<string[] | null>(null);
+  const [isImageError, setIsImageError] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   const startDate = new Date(experience.start_date);
@@ -84,13 +89,20 @@ const ExperienceItem = ({
           {hasImage && (
             <Col sm={24} md={24} lg={4} className="w-full hidden lg:block">
               <div className="relative w-full h-16 bg-red-50 xl:h-20">
-                <Image
-                  alt="Image Experience"
-                  src={experience.image_company ?? ""}
-                  className={"rounded-xl shadow-xl"}
-                  style={{ objectFit: "cover" }}
-                  fill
-                />
+                {!isImageError ? (
+                  <Image
+                    alt="Image Experience"
+                    src={experience.image_company ?? ""}
+                    className={"rounded-xl shadow-xl"}
+                    style={{ objectFit: "cover" }}
+                    onError={(e) => setIsImageError(true)}
+                    fill
+                  />
+                ) : (
+                  <div className="h-full flex flex-col justify-center items-center">
+                    <WarningOutlined className="text-watanasa-danger-600 text-4xl" />
+                  </div>
+                )}
               </div>
             </Col>
           )}

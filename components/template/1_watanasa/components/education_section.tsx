@@ -1,10 +1,15 @@
 import { Card } from "antd";
 import Image from "next/image";
+import { useState } from "react";
+
+import { WarningOutlined } from "@ant-design/icons";
 
 import { CVEducationInterface } from "../../../../interface/cv/cveducation_interface";
 import { dateToyMd } from "../../../../utils/function";
 
 const EducationItem = ({ education }: { education: CVEducationInterface }) => {
+  const [isImageError, setIsImageError] = useState(false);
+
   const startDate = new Date(education.start_date);
   const endDate = education.end_date && new Date(education.end_date);
   const hasImage = education.image;
@@ -13,13 +18,20 @@ const EducationItem = ({ education }: { education: CVEducationInterface }) => {
       <div className="h-80 flex flex-col justify-center items-center text-center space-y-1">
         {hasImage && (
           <div className="relative h-24 w-24">
-            <Image
-              alt="Education Image"
-              src={education.image ?? ""}
-              className="rounded-full shadow"
-              style={{ objectFit: "cover" }}
-              fill
-            />
+            {!isImageError ? (
+              <Image
+                alt="Education Image"
+                src={education.image ?? ""}
+                className="rounded-full shadow"
+                style={{ objectFit: "cover" }}
+                onError={(e) => setIsImageError(true)}
+                fill
+              />
+            ) : (
+              <div className="h-full flex flex-col justify-center items-center">
+                <WarningOutlined className="text-4xl text-watanasa-danger-600" />
+              </div>
+            )}
           </div>
         )}
         <div className="text-watanasa-primary-500 text-lg font-medium py-5">
