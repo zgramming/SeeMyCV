@@ -1,4 +1,5 @@
 import { Button, Col, notification, Row, Tooltip } from "antd";
+import { saveAs } from "file-saver";
 
 import {
   faFacebook,
@@ -15,6 +16,9 @@ const linkedInUrl = "https://www.linkedin.com/in/zeffry-reynando/";
 const facebookUrl = "https://www.facebook.com/zeffry.reynando/";
 const instagramUrl = "https://www.instagram.com/zeffry_reynando/";
 const email = "zeffry.reynando@gmail.com";
+const pathPDF = "/pdf/zeffry_cv.pdf";
+const namePDF = "zeffry-reynando.pdf";
+
 const FooterSection = () => {
   return (
     <div className="bg-watanasa-primary-500 py-24 px-5 md:px-12 lg:px-24">
@@ -44,9 +48,14 @@ const FooterSection = () => {
               size="large"
               type="primary"
               onClick={(e) => {
-                notification.info({
-                  message: "On Progress",
-                });
+                try {
+                  saveAs(pathPDF, namePDF);
+                  notification.info({
+                    message: "Berhasil download CV",
+                  });
+                } catch (error) {
+                  alert("error");
+                }
               }}
             >
               Download CV
