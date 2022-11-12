@@ -4,14 +4,16 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { env } from "process";
-import WatanasaTemplate from "../../components/template/1_watanasa/watanasa_template";
 
+import WatanasaTemplate from "../../components/template/1_watanasa/watanasa_template";
 import DefaultTemplateWebsite from "../../components/template/default/default_template_website";
 import { Users } from "../../interface/main_interface";
 
 interface Props {
   user?: Users;
 }
+
+const chooseTemplate = (codeTemplate: string) => {};
 
 const Page = (props: Props) => {
   const { query, replace } = useRouter();
@@ -39,7 +41,7 @@ const Page = (props: Props) => {
         <title>{props.user.name}</title>
       </Head>
       {/* <DefaultTemplateWebsite user={props.user} /> */}
-      <WatanasaTemplate />
+      <WatanasaTemplate user={props.user} />
     </>
   );
 };
@@ -56,7 +58,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       message,
       data,
     }: { success: boolean; message: string; data: Users } = response.data;
-
+    console.log({ data });
     return {
       props: {
         user: data,

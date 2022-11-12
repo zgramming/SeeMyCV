@@ -1,16 +1,17 @@
 import { Card } from "antd";
 import Image from "next/image";
 
+import { CVSkillInterface } from "../../../../interface/cv/cvskill_interface";
 import BGGradient from "../../../../public/template/watanasa/bg_gradient.png";
 
-const SkillItem = () => {
+const SkillItem = ({ skill }: { skill: CVSkillInterface }) => {
   return (
     <Card
       className="bg-watanasa-primary-900 rounded-xl border-none shadow"
       hoverable
     >
       <div className="flex flex-col text-white space-y-5">
-        <div className="font-medium text-base">Advance</div>
+        <div className="font-medium text-base">{skill.level.name}</div>
         <div className="flex flex-row items-center  space-x-3 ">
           <Card
             className="bg-watanasa-primary-800 border-none"
@@ -20,19 +21,19 @@ const SkillItem = () => {
             }}
           >
             <div className="flex flex-col justify-center items-center text-white text-xl font-semibold">
-              U
+              {skill.name.length > 0 ? skill.name[0] : "?"}
             </div>
           </Card>
-          <div className="text-xl text-white font-semibold">UI/UX Designer</div>
+          <div className="text-xl text-white font-semibold">{skill.name}</div>
         </div>
       </div>
     </Card>
   );
 };
 
-const SkillSection = () => {
+const SkillSection = ({ skills }: { skills: CVSkillInterface[] }) => {
   return (
-    <div className="relative min-h-screen">
+    <div className="relative">
       <div className="absolute top-0 left-0 right-0 bottom-0 z-[-1]">
         <Image
           alt="Image Skill"
@@ -46,8 +47,8 @@ const SkillSection = () => {
           SPECIALIZING IN / SKILLS
         </div>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-          {Array.from<number>({ length: 16 }).map((val, index) => {
-            return <SkillItem key={val} />;
+          {skills.map((val, index) => {
+            return <SkillItem key={val.id} skill={val} />;
           })}
         </div>
       </div>
