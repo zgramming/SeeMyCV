@@ -1,10 +1,13 @@
 import { Button, Card } from "antd";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import { CVPortfolioInterface } from "../../../../interface/cv/cvportfolio_interface";
 import BGGradient from "../../../../public/template/watanasa/bg_gradient.png";
 
 const PortfolioItem = ({ portfolio }: { portfolio: CVPortfolioInterface }) => {
+  const { push, query } = useRouter();
+  const { username } = query;
   return (
     <Card
       style={{
@@ -16,6 +19,8 @@ const PortfolioItem = ({ portfolio }: { portfolio: CVPortfolioInterface }) => {
         margin: 0,
       }}
       className="shadow rounded-xl"
+      onClick={(e) => push(`/${username}/portfolio/${portfolio.slug}`)}
+      hoverable
     >
       <div className="relative h-72">
         <Image

@@ -4,6 +4,8 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { env } from "process";
+import { ReactElement } from "react";
+import CustomLayout from "../../components/layout/custom_layout";
 
 import WatanasaTemplate from "../../components/template/1_watanasa/watanasa_template";
 import DefaultTemplateWebsite from "../../components/template/default/default_template_website";
@@ -60,13 +62,17 @@ const Page = (props: Props) => {
   );
 };
 
+Page.getLayout = function getLayout(page: ReactElement) {
+  return <CustomLayout>{page}</CustomLayout>;
+};
+
 export default Page;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const params = context.params;
     const username = params?.username;
-    const response = await axios.get(`${env.BASEAPIURL}/user/${username}`);
+    const response = await axios.get(`${env.BASEAPIURL}/v1/user/${username}`);
     const {
       success,
       message,

@@ -1,14 +1,14 @@
-import { Button, Col, Form, Input, Modal, notification, Row, Spin } from "antd";
-import Search from "antd/lib/input/Search";
-import axios from "axios";
-import Head from "next/head";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { useState } from "react";
+import { Button, Col, Form, Input, Modal, notification, Row, Spin } from 'antd';
+import Search from 'antd/lib/input/Search';
+import axios from 'axios';
+import Head from 'next/head';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
-import BG1 from "../public/images/bg_index_1.png";
-import BG2 from "../public/images/bg_index_2.png";
-import BG3 from "../public/images/bg_index_3.png";
+import BG1 from '../public/images/bg_index_1.png';
+import BG2 from '../public/images/bg_index_2.png';
+import BG3 from '../public/images/bg_index_3.png';
 
 const NavbarIndex = () => {
   const { push } = useRouter();
@@ -180,7 +180,7 @@ const ButtonSignUp = () => {
   const onFinish = async () => {
     try {
       setIsLoading(true);
-      const url = process.env.NEXT_PUBLIC_BASEAPIURL + `/user/signup`;
+      const url = process.env.NEXT_PUBLIC_BASEAPIURL + `/v1/user/signup`;
       const { email, username, password } = await form.validateFields();
       const { data, status } = await axios.post(url, {
         username,

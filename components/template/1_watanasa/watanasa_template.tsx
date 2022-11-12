@@ -1,9 +1,7 @@
 import { Users } from "../../../interface/main_interface";
 import EducationSection from "./components/education_section";
 import ExperienceSection from "./components/experience_section";
-import FooterSection from "./components/footer_section";
 import LicenseCertificateSection from "./components/license_certificate_section";
-import NavbarSection from "./components/navbar_section";
 import PortfolioSection from "./components/portfolio_section";
 import ProfileSection from "./components/profile_section";
 import SkillSection from "./components/skill_section";
@@ -11,7 +9,6 @@ import SkillSection from "./components/skill_section";
 const WatanasaTemplate = ({ user }: { user: Users }) => {
   return (
     <div className="font-poppins">
-      <NavbarSection />
       {user.CVProfile && <ProfileSection user={user} />}
       {user.CVExperience.length !== 0 && (
         <ExperienceSection experiences={user.CVExperience} />
@@ -27,7 +24,6 @@ const WatanasaTemplate = ({ user }: { user: Users }) => {
       {user.CVLicenseCertificate.length !== 0 && (
         <LicenseCertificateSection licenses={user.CVLicenseCertificate} />
       )}
-      <FooterSection />
     </div>
   );
 };

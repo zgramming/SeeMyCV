@@ -23,7 +23,7 @@ const FooterSection = () => {
   return (
     <div className="bg-watanasa-primary-500 py-24 px-5 md:px-12 lg:px-24">
       <Row>
-        <Col sm={24} md={24} lg={14} className="w-full">
+        <Col sm={24} md={24} lg={13} className="w-full pr-0 lg:pr-10">
           <div className="flex flex-col text-white space-y-10">
             <div className="font-semibold text-4xl xl:text-6xl">
               Want To Work Together On A Project?
@@ -33,7 +33,7 @@ const FooterSection = () => {
             </div>
           </div>
         </Col>
-        <Col sm={24} md={24} lg={10} className="w-full pt-10 lg:pt-0">
+        <Col sm={24} md={24} lg={11} className="w-full pt-10 lg:pt-0">
           <div className="flex flex-col space-y-5">
             <Button
               className="w-full border-solid border-white rounded-lg h-16 text-watanasa-primary-500 font-bold"
@@ -60,39 +60,39 @@ const FooterSection = () => {
             >
               Download CV
             </Button>
-            <div className="flex flex-wrap justify-center space-x-10 text-white py-5">
+            <div className="flex flex-wrap justify-center space-x-8 text-white py-5">
               <Tooltip title="Github" className="hover:cursor-pointer">
                 <FontAwesomeIcon
                   icon={faGithub}
-                  className="h-10 w-10"
+                  className="h-8 w-8 md:h-10 md:w-10"
                   onClick={(e) => window.open(githubUrl)}
                 />
               </Tooltip>
               <Tooltip title="Website" className="hover:cursor-pointer">
                 <FontAwesomeIcon
                   icon={faGlobe}
-                  className="h-10 w-10"
+                  className="h-8 w-8 md:h-10 md:w-10"
                   onClick={(e) => window.open(webUrl)}
                 />
               </Tooltip>
               <Tooltip title="Instagram" className="hover:cursor-pointer">
                 <FontAwesomeIcon
                   icon={faInstagram}
-                  className="h-10 w-10"
+                  className="h-8 w-8 md:h-10 md:w-10"
                   onClick={(e) => window.open(instagramUrl)}
                 />
               </Tooltip>
               <Tooltip title="Facebook" className="hover:cursor-pointer">
                 <FontAwesomeIcon
                   icon={faFacebook}
-                  className="h-10 w-10"
+                  className="h-8 w-8 md:h-10 md:w-10"
                   onClick={(e) => window.open(facebookUrl)}
                 />
               </Tooltip>
               <Tooltip title="LinkedIn" className="hover:cursor-pointer">
                 <FontAwesomeIcon
                   icon={faLinkedin}
-                  className="h-10 w-10"
+                  className="h-8 w-8 md:h-10 md:w-10"
                   onClick={(e) => window.open(linkedInUrl)}
                 />
               </Tooltip>
