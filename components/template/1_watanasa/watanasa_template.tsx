@@ -1,4 +1,7 @@
+import { useEffect, useRef } from "react";
+
 import { Users } from "../../../interface/main_interface";
+import navigationScrollToComponent from "../../../repository/navigation_scrollto_component";
 import EducationSection from "./components/education_section";
 import ExperienceSection from "./components/experience_section";
 import LicenseCertificateSection from "./components/license_certificate_section";
@@ -7,22 +10,70 @@ import ProfileSection from "./components/profile_section";
 import SkillSection from "./components/skill_section";
 
 const WatanasaTemplate = ({ user }: { user: Users }) => {
+  const profileRef = useRef(null);
+  const experienceRef = useRef(null);
+  const educationRef = useRef(null);
+  const skillRef = useRef(null);
+  const licenseCertificateRef = useRef(null);
+  const portfolioRef = useRef(null);
+
+  useEffect(() => {
+    navigationScrollToComponent.setRefs({ code: "profile", ref: profileRef });
+    navigationScrollToComponent.setRefs({
+      code: "experience",
+      ref: experienceRef,
+    });
+    navigationScrollToComponent.setRefs({
+      code: "education",
+      ref: educationRef,
+    });
+    navigationScrollToComponent.setRefs({
+      code: "skill",
+      ref: skillRef,
+    });
+    navigationScrollToComponent.setRefs({
+      code: "l&c",
+      ref: licenseCertificateRef,
+    });
+    navigationScrollToComponent.setRefs({
+      code: "portfolio",
+      ref: portfolioRef,
+    });
+    return () => {};
+  }, []);
+
   return (
     <div className="font-poppins">
-      {user.CVProfile && <ProfileSection user={user} />}
+      {user.CVProfile && (
+        <div ref={profileRef}>
+          <ProfileSection user={user} />
+        </div>
+      )}
       {user.CVExperience.length !== 0 && (
-        <ExperienceSection experiences={user.CVExperience} />
+        <div ref={experienceRef}>
+          <ExperienceSection experiences={user.CVExperience} />
+        </div>
       )}
 
       {user.CVEducation.length !== 0 && (
-        <EducationSection educations={user.CVEducation} />
+        <div ref={educationRef}>
+          <EducationSection educations={user.CVEducation} />
+        </div>
       )}
-      {user.CVSkill.length !== 0 && <SkillSection skills={user.CVSkill} />}
+      {user.CVSkill.length !== 0 && (
+        <div ref={skillRef}>
+          <SkillSection skills={user.CVSkill} />
+        </div>
+      )}
       {user.CVPortfolio.length !== 0 && (
-        <PortfolioSection portfolios={user.CVPortfolio} />
+        <div ref={portfolioRef}>
+          <PortfolioSection portfolios={user.CVPortfolio} />
+        </div>
       )}
       {user.CVLicenseCertificate.length !== 0 && (
-        <LicenseCertificateSection licenses={user.CVLicenseCertificate} />
+        <div ref={licenseCertificateRef}>
+          <LicenseCertificateSection licenses={user.CVLicenseCertificate} />
+        </div>
       )}
     </div>
   );

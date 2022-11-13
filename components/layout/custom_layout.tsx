@@ -1,16 +1,9 @@
 import { ReactNode } from "react";
 
-import { Users } from "../../interface/main_interface";
 import FooterSection from "../template/1_watanasa/components/footer_section";
 import NavbarSection from "../template/1_watanasa/components/navbar_section";
 
-const CustomLayout = ({
-  children,
-  user,
-}: {
-  children: ReactNode;
-  user?: Users;
-}) => {
+const CustomLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <NavbarSection />
