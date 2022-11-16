@@ -1,34 +1,58 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Banner](demo/banner.png)
 
-## Getting Started
+# SeeMyCV
 
-First, run the development server:
+A website that gives you a place to showcase your personal branding and expertise to the world
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Client:** React, NextJS, Ant Design, TailwindCSS
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+**Server:** Node, KoaJS
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Installation
 
-## Learn More
+1. `npm install`
+2. `cp .env.example .env.development` && `cp .env.example .env.production`
+3. `npm run dev`
+4. Access server development at `localhost:3000`
 
-To learn more about Next.js, take a look at the following resources:
+## Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Landing Page
+- Personal Your Website depend on Username
+- Profile Section
+- Experience Section
+- Education Section
+- Skill Section
+- Portfolio Section
+- Portfolio Detail Section
+- License & Certificate Section
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Demo
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Landing Page
+![](demo/1.seemycv.gif)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Profile User
+![](demo/2.seemycv.gif)
+
+
+## Related
+
+Here are some related projects
+
+[Admin SeeMyCV](https://github.com/zgramming/admin.seemycv)
+[API SeeMyCV](https://github.com/zgramming/api.seemycv)
+
+
+## Feedback
+
+If you have any feedback, please reach out to us at zeffry.reynando@gmail.com
+
+
+## Authors
+
+- [@zgramming](https://www.github.com/zgramming)
