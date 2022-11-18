@@ -1,10 +1,8 @@
-import { Button, Col, Form, Input, Modal, notification, Row, Spin } from "antd";
+import { Button, Col, Row } from "antd";
 import Search from "antd/lib/input/Search";
-import axios from "axios";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
 
 import BG1 from "../public/images/bg_index_1.png";
 import BG2 from "../public/images/bg_index_2.png";
