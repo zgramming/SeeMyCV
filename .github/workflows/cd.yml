@@ -30,9 +30,9 @@ jobs:
             echo "CD to folder project"
             cd /var/www/seemycv
             echo "Reset Git to the latest commit"
-            git reset --hard
+            git reset --hard origin/main
             echo "Pull Rebase"
-            git pull --rebase
+            git pull origin main --rebase
             echo "NPM I if available new package"
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
@@ -40,5 +40,5 @@ jobs:
             npm i
             echo "Re-build application"
             npm run build
-            echo "Restart Application, web is name pm2 instance application"
+            echo "Restart Application, web is name pm2 instance application"  
             pm2 restart web
