@@ -3,15 +3,26 @@ import axios from "axios";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { env } from "process";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 import CustomLayout from "../../../../components/layout/custom_layout";
 import { CVPortfolioInterface } from "../../../../interface/cv/cvportfolio_interface";
 
 const Page = ({ portfolio }: { portfolio: CVPortfolioInterface }) => {
+  const [tags, setTags] = useState<Array<string>>([]);
   const createdDate = new Date(portfolio.created_at);
   const url = `${process.env.NEXT_PUBLIC_BASEURL}`;
   const imageUrl = `${process.env.NEXT_PUBLIC_BASEURL}/images/logo_primary.png`;
+
+  useEffect(() => {
+    try {
+      if (portfolio.tags) {
+        const parseTag: Array<string> = JSON.parse(portfolio.tags);
+        setTags((state) => parseTag);
+      }
+    } catch (error) {}
+    return () => {};
+  }, [portfolio.tags]);
 
   return (
     <>
@@ -59,13 +70,13 @@ const Page = ({ portfolio }: { portfolio: CVPortfolioInterface }) => {
         <div className="flex flex-col space-y-3">
           <div className="font-medium text-xl">Tags</div>
           <div className="flex flex-wrap items-center space-x-3">
-            {portfolio.urls.map((val, index) => {
+            {tags.map((val, index) => {
               return (
                 <Tag
-                  key={val.id}
+                  key={val}
                   className="bg-watanasa-primary-100 text-watanasa-primary-500 text-base font-semibold border-none shadow rounded mb-1 p-2"
                 >
-                  {val.name}
+                  {val}
                 </Tag>
               );
             })}
