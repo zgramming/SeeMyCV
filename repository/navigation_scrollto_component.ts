@@ -26,11 +26,11 @@ export class NavigationScrollToComponent {
       ?.ref.current!.scrollIntoView({ behavior: "smooth" });
   };
 
-  setRefs = (params: RefsParams) => {
-    const isExists = this.refs?.find((val) => val.code === params.code);
-    if (isExists) return;
-    this.refs = [...(this.refs ?? []), params];
-    console.log({ refs: this.refs });
+  setRefs = (params: RefsParams[]) => {
+    this.refs = [];
+    for (const param of params) {
+      this.refs = [...this.refs, param];
+    }
   };
 }
 

@@ -21,7 +21,7 @@ const namePDF = "zeffry-reynando.pdf";
 
 const FooterSection = () => {
   return (
-    <div className="bg-watanasa-primary-500 py-24 px-5 md:px-12 lg:px-24">
+    <div className="bg-watanasa-primary-500 py-24 px-5 md:px-12 lg:px-24 font-poppins">
       <Row>
         <Col sm={24} md={24} lg={13} className="w-full pr-0 lg:pr-10">
           <div className="flex flex-col text-white space-y-10">
