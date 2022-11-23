@@ -65,6 +65,10 @@ module.exports = {
           "gray-lighter-2": "#F7F9FC",
           "gray-1": "#333333",
           "gray-3": "#828282",
+          "skill-advance": "#FFB10F26",
+          "skill-intermediate": "#889BB526",
+          "skill-basic": "#CA570026",
+          "skill-beginner": "#FFB10F26",
         },
         default: {
           /// Shades

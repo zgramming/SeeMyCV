@@ -2,7 +2,7 @@ import { Button, Card, Col, Row } from "antd";
 import Image from "next/image";
 
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
-import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import { faClover, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { Users } from "../../../interface/main_interface";
@@ -225,7 +225,48 @@ const EducationSection = () => {
 };
 
 const SkillSection = () => {
-  return <></>;
+  return (
+    <div className="flex flex-col bg-naraai-primary-100 py-24 px-5 md:px-12 lg:px-24">
+      <div className="text-center text-naraai-primary-500 text-4xl font-bold pb-8">
+        SPECIALIZING IN / SKILLS
+      </div>
+      <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-4 xl:gap-20">
+        {["Advance", "Intermediate", "Basic", "Beginner"].map((skill) => {
+          return (
+            <Card
+              key={skill}
+              className="bg-naraai-skill-advance border-none shadow rounded-xl"
+              style={{ padding: 0, margin: 0 }}
+              bodyStyle={{ padding: 0, margin: 0 }}
+            >
+              <div className="flex flex-col">
+                <div className="flex flex-row justify-center items-center py-5">
+                  <FontAwesomeIcon
+                    icon={faClover}
+                    className="h-20 w-20 text-naraai-primary-500"
+                  />
+                </div>
+                <div className="flex flex-col bg-white p-5">
+                  <div className="font-semibold text-xl text-naraai-gray-1 pb-4">
+                    {skill}
+                  </div>
+                  <div className="grid grid-cols-2 gap-5">
+                    {Array.from<number>({ length: 10 }).map((val) => {
+                      return (
+                        <div key={val} className="text-naraai-gray-3">
+                          ReactJS
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </Card>
+          );
+        })}
+      </div>
+    </div>
+  );
 };
 
 const PortfolioSection = () => {
