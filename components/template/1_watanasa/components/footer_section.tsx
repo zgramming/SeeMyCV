@@ -44,7 +44,7 @@ const FooterSection = () => {
               Contact Me
             </Button>
             <Button
-              className="w-full border-solid border-white rounded-lg h-16"
+              className="w-full border-solid  font-bold rounded-lg h-16"
               size="large"
               type="primary"
               onClick={(e) => {

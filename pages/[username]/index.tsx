@@ -4,22 +4,24 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { env } from "process";
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 
 import CustomLayout from "../../components/layout/custom_layout";
 import WatanasaTemplate from "../../components/template/1_watanasa/watanasa_template";
-import DefaultTemplateWebsite from "../../components/template/default/default_template_website";
 import { Users } from "../../interface/main_interface";
+import userStore from "../../repository/user_store";
 
-interface Props {
-  user?: Users;
-}
-
-const chooseTemplate = (codeTemplate: string) => {};
-
-const Page = (props: Props) => {
+const Page = ({ user }: { user: Users }) => {
   const { query, replace, asPath } = useRouter();
-  if (!props.user) {
+
+  useEffect(() => {
+    if (user) {
+      userStore.setItem(user);
+    }
+    return () => {};
+  }, [user]);
+
+  if (!user) {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center space-y-5 bg-watanasa-accent">
         <div className="text-5xl text-white text-center ">
@@ -37,7 +39,7 @@ const Page = (props: Props) => {
     );
   }
 
-  const { CVProfile, name, username } = props.user;
+  const { CVProfile, name, username } = user;
   const url = `${process.env.NEXT_PUBLIC_BASEURL}/${username}`;
   const imageUrl = `${process.env.NEXT_PUBLIC_BASEURL}/images/logo_primary.png`;
 
@@ -56,8 +58,9 @@ const Page = (props: Props) => {
         <meta property="og:description" content={CVProfile?.description} />
       </Head>
 
-      {/* <DefaultTemplateWebsite user={props.user} /> */}
-      <WatanasaTemplate user={props.user} />
+      {/* <DefaultTemplateWebsite user={user} /> */}
+      <WatanasaTemplate user={user} />
+      {/* <NaraaiTemplate user={user} /> */}
     </>
   );
 };
