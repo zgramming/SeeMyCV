@@ -1,4 +1,5 @@
 import { Drawer } from "antd";
+import { observer } from "mobx-react-lite";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -6,6 +7,7 @@ import { useState } from "react";
 import { NavigationMenuInterface } from "../../../../interface/navigation_menu";
 import BarSVG from "../../../../public/template/watanasa/bar.svg";
 import navigationScrollToComponent from "../../../../repository/navigation_scrollto_component";
+import { UserStore } from "../../../../repository/user_store";
 
 const menus: NavigationMenuInterface[] = [
   { name: "Experience", code: "experience" },
@@ -76,9 +78,27 @@ const NavbarItems = () => {
   );
 };
 
-const NavbarSection = () => {
+const NavbarSection = observer(({ userStore }: { userStore: UserStore }) => {
   const { query, push } = useRouter();
   const { slug, username } = query;
+
+  // const {
+  //   data: dataUser,
+  //   mutate: reloadUser,
+  //   isValidating: isLoadingUser,
+  //   error,
+  // } = useSWR(
+  //   [`${process.env.NEXT_PUBLIC_BASEAPIURL}/v1/user/${username}`],
+  //   async (url) => {
+  //     const response = await axios.get(url);
+  //     const {
+  //       success,
+  //       message,
+  //       data,
+  //     }: { success: boolean; message: string; data: Users } = response.data;
+  //     return data;
+  //   }
+  // );
   return (
     <div
       className={`sticky top-0 z-50 bg-white shadow py-5 px-5 md:px-12 lg:py-12 lg:px-24`}
@@ -105,6 +125,6 @@ const NavbarSection = () => {
       </div>
     </div>
   );
-};
+});
 
 export default NavbarSection;

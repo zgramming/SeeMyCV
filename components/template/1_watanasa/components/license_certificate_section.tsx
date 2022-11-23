@@ -33,24 +33,26 @@ const LicenseCertificateItem = ({
             <CalendarOutlined />
             <div>{dateToyMd(startDate)}</div>
           </div>
-          <div className="flex flex-row items-center space-x-2">
-            <LinkOutlined />
-            <div
-              onClick={(e) => {
-                if (!license.url) return;
-                window.open(license.url);
-              }}
-              className="font-medium text-watanasa-gray-3"
-              style={{
-                ...(license.url && {
-                  textDecoration: "underline",
-                  cursor: "pointer",
-                }),
-              }}
-            >
-              Credential : {license.credential}
+          {license.credential && (
+            <div className="flex flex-row items-center space-x-2">
+              <LinkOutlined />
+              <div
+                onClick={(e) => {
+                  if (!license.url) return;
+                  window.open(license.url);
+                }}
+                className="font-medium text-watanasa-gray-3"
+                style={{
+                  ...(license.url && {
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }),
+                }}
+              >
+                Credential : {license.credential}
+              </div>
             </div>
-          </div>
+          )}
           {license.file && (
             <div className="flex flex-row justify-start">
               <Button
