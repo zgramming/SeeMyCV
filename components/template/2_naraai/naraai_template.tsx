@@ -1,12 +1,12 @@
-import { Button, Card, Col, Row } from 'antd';
-import Image from 'next/image';
+import { Button, Card, Col, Row } from "antd";
+import Image from "next/image";
 
-import { faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook } from "@fortawesome/free-brands-svg-icons";
+import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { Users } from '../../../interface/main_interface';
-import IconSocialMedia from '../../reusable/icon_social_media';
+import { Users } from "../../../interface/main_interface";
+import IconSocialMedia from "../../reusable/icon_social_media";
 
 const ProfileSection = () => {
   return (
@@ -207,11 +207,13 @@ const EducationSection = () => {
                       fill
                     />
                   </div>
-                  <div className="text-naraai-gray-1 text-xl font-medium pl-6">
+                  <div className="text-naraai-gray-1 text-base font-medium pl-6 xl:text-xl">
                     SMK Negeri 1 Kota Bekasi
                   </div>
                 </div>
-                <div className="text-xl font-medium pb-1">Rekayasa Perangkat Lunak</div>
+                <div className="text-base font-medium pb-1 xl:text-xl">
+                  Rekayasa Perangkat Lunak
+                </div>
                 <div className="text-sm text-naraai-gray-3">2020 - present</div>
               </div>
             </Card>
