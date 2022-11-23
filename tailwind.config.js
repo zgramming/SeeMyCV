@@ -59,6 +59,17 @@ module.exports = {
           "gray-3": "#828282",
           "gray-4": "#BDBDBD",
         },
+        naraai: {
+          "primary-100": "#E7E0FD",
+          "primary-500": "#7562E0",
+          "gray-lighter-2": "#F7F9FC",
+          "gray-1": "#333333",
+          "gray-3": "#828282",
+          "skill-advance": "#FFB10F26",
+          "skill-intermediate": "#889BB526",
+          "skill-basic": "#CA570026",
+          "skill-beginner": "#FFB10F26",
+        },
         default: {
           /// Shades
           primary: "#DD5353",
@@ -82,6 +93,7 @@ module.exports = {
       fontFamily: {
         "josefin-sans": ["Josefin Sans", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
+        "dm-sans": ["DM Sans", "sans-serif"],
       },
     },
   },

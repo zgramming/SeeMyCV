@@ -7,6 +7,7 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { CVEducationInterface } from "../../../../interface/cv/cveducation_interface";
+import LogoPrimary from "../../../../public/images/logo_primary.png";
 import activeNavigationBarStore from "../../../../repository/active_navigationbar";
 
 const EducationSection = forwardRef<
@@ -34,7 +35,7 @@ const EducationSection = forwardRef<
                   <Card key={val.id} className="bg-default-scaffold shadow">
                     <div className="flex flex-row items-start space-x-5">
                       <Image
-                        src={`${val.image}`}
+                        src={val.image ? val.image : LogoPrimary}
                         alt="Image Company Experience"
                         className="rounded-lg"
                         width={60}

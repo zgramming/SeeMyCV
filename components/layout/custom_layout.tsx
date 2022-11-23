@@ -9,7 +9,7 @@ const CustomLayout = ({ children }: { children: ReactNode }) => {
     <>
       <NavbarSection userStore={userStore} />
       {children}
-      <FooterSection />
+      <FooterSection userStore={userStore} />
     </>
   );
 };

@@ -7,6 +7,7 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { CVExperienceInterface } from "../../../../interface/cv/cvexperience_interface";
+import LogoPrimary from "../../../../public/images/logo_primary.png";
 import activeNavigationBarStore from "../../../../repository/active_navigationbar";
 import { calculatingExperience, dateToyMd } from "../../../../utils/function";
 
@@ -41,7 +42,9 @@ const ExperienceSection = forwardRef<
                     <div className="flex flex-row items-start space-x-5">
                       <div className="hidden md:block">
                         <Image
-                          src={`${val.image_company}`}
+                          src={
+                            val.image_company ? val.image_company : LogoPrimary
+                          }
                           alt="Image Company Experience"
                           className="rounded-lg"
                           width={60}

@@ -8,8 +8,22 @@ import { ReactElement, useEffect } from "react";
 
 import CustomLayout from "../../components/layout/custom_layout";
 import WatanasaTemplate from "../../components/template/1_watanasa/watanasa_template";
+import NaraaiTemplate from "../../components/template/2_naraai/naraai_template";
+import DefaultTemplateWebsite from "../../components/template/default/default_template_website";
 import { Users } from "../../interface/main_interface";
 import userStore from "../../repository/user_store";
+
+const HandlerTemplate = ({ user }: { user: Users }) => {
+  switch (user.CVTemplateWebsite?.template_website?.code) {
+    case "KODE_TEMPLATE_WEB_WATANASA":
+      return <WatanasaTemplate user={user} />;
+    case "KODE_TEMPLATE_WEB_NARAAI":
+      return <NaraaiTemplate user={user} />;
+
+    default:
+      return <DefaultTemplateWebsite user={user} />;
+  }
+};
 
 const Page = ({ user }: { user: Users }) => {
   const { query, replace, asPath } = useRouter();
@@ -59,8 +73,9 @@ const Page = ({ user }: { user: Users }) => {
       </Head>
 
       {/* <DefaultTemplateWebsite user={user} /> */}
-      <WatanasaTemplate user={user} />
+      {/* <WatanasaTemplate user={user} /> */}
       {/* <NaraaiTemplate user={user} /> */}
+      <HandlerTemplate user={user} />
     </>
   );
 };

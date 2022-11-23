@@ -13,11 +13,11 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { CVProfileInterface } from "../../../../interface/cv/cvprofile_interface";
 import { Users } from "../../../../interface/main_interface";
 import BGProfile from "../../../../public/template/watanasa/bg_profile.png";
+import IconSocialMedia from "../../../reusable/icon_social_media";
 
 const ProfileBackgroundImage = () => {
   return (
@@ -41,28 +41,6 @@ const ProfileContent = ({
   name: string;
   email: string;
 }) => {
-  const Icon = ({
-    title,
-    content,
-    icon,
-    onClick,
-  }: {
-    title: string;
-    content?: string;
-    icon: IconProp;
-    onClick: () => void;
-  }) => {
-    if (!content) return null;
-    return (
-      <Tooltip title={title} className="hover:cursor-pointer">
-        <FontAwesomeIcon
-          icon={icon}
-          className="h-8 w-8 text-watanasa-primary-500"
-          onClick={onClick}
-        />
-      </Tooltip>
-    );
-  };
   return (
     <div className="flex flex-col items-center text-center space-y-8">
       <div className="text-watanasa-gray-3 text-lg font-medium">
@@ -75,40 +53,46 @@ const ProfileContent = ({
         {profile?.description}
       </div>
       <div className="flex flex-wrap space-x-5">
-        <Icon
+        <IconSocialMedia
           title="Web"
-          content={profile?.web}
+          visible={profile?.web ? true : false}
           icon={faGlobe}
+          className="h-8 w-8 text-watanasa-primary-500"
           onClick={() => window.open(profile?.web)}
         />
-        <Icon
+        <IconSocialMedia
           title="Twitter"
-          content={profile?.twitter}
+          visible={profile?.twitter ? true : false}
           icon={faTwitter}
+          className="h-8 w-8 text-watanasa-primary-500"
           onClick={() => window.open(profile?.twitter)}
         />
-        <Icon
+        <IconSocialMedia
           title="Facebook"
-          content={profile?.facebook}
+          visible={profile?.facebook ? true : false}
           icon={faFacebook}
+          className="h-8 w-8 text-watanasa-primary-500"
           onClick={() => window.open(profile?.facebook)}
         />
-        <Icon
+        <IconSocialMedia
           title="Instagram"
-          content={profile?.instagram}
+          visible={profile?.instagram ? true : false}
           icon={faInstagram}
+          className="h-8 w-8 text-watanasa-primary-500"
           onClick={() => window.open(profile?.instagram)}
         />
-        <Icon
+        <IconSocialMedia
           title="LinkedIn"
-          content={profile?.linkedIn}
+          visible={profile?.linkedIn ? true : false}
           icon={faLinkedin}
+          className="h-8 w-8 text-watanasa-primary-500"
           onClick={() => window.open(profile?.linkedIn)}
         />
-        <Icon
+        <IconSocialMedia
           title="Github"
-          content={profile?.github}
+          visible={profile?.github ? true : false}
           icon={faGithub}
+          className="h-8 w-8 text-watanasa-primary-500"
           onClick={() => window.open(profile?.github)}
         />
       </div>
