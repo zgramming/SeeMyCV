@@ -8,6 +8,7 @@ import { ReactElement, useEffect } from "react";
 
 import CustomLayout from "../../components/layout/custom_layout";
 import WatanasaTemplate from "../../components/template/1_watanasa/watanasa_template";
+import NaraaiTemplate from "../../components/template/2_naraai/naraai_template";
 import { Users } from "../../interface/main_interface";
 import userStore from "../../repository/user_store";
 
@@ -59,8 +60,8 @@ const Page = ({ user }: { user: Users }) => {
       </Head>
 
       {/* <DefaultTemplateWebsite user={user} /> */}
-      <WatanasaTemplate user={user} />
-      {/* <NaraaiTemplate user={user} /> */}
+      {/* <WatanasaTemplate user={user} /> */}
+      <NaraaiTemplate user={user} />
     </>
   );
 };

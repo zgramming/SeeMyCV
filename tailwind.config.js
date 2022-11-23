@@ -59,6 +59,12 @@ module.exports = {
           "gray-3": "#828282",
           "gray-4": "#BDBDBD",
         },
+        naraai: {
+          "primary-100": "#E7E0FD",
+          "primary-500": "#7562E0",
+          "gray-1": "#333333",
+          "gray-3": "#828282",
+        },
         default: {
           /// Shades
           primary: "#DD5353",
