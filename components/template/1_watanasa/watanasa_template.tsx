@@ -18,27 +18,29 @@ const WatanasaTemplate = ({ user }: { user: Users }) => {
   const portfolioRef = useRef(null);
 
   useEffect(() => {
-    navigationScrollToComponent.setRefs({ code: "profile", ref: profileRef });
-    navigationScrollToComponent.setRefs({
-      code: "experience",
-      ref: experienceRef,
-    });
-    navigationScrollToComponent.setRefs({
-      code: "education",
-      ref: educationRef,
-    });
-    navigationScrollToComponent.setRefs({
-      code: "skill",
-      ref: skillRef,
-    });
-    navigationScrollToComponent.setRefs({
-      code: "l&c",
-      ref: licenseCertificateRef,
-    });
-    navigationScrollToComponent.setRefs({
-      code: "portfolio",
-      ref: portfolioRef,
-    });
+    navigationScrollToComponent.setRefs([
+      { code: "profile", ref: profileRef },
+      {
+        code: "experience",
+        ref: experienceRef,
+      },
+      {
+        code: "education",
+        ref: educationRef,
+      },
+      {
+        code: "skill",
+        ref: skillRef,
+      },
+      {
+        code: "l&c",
+        ref: licenseCertificateRef,
+      },
+      {
+        code: "portfolio",
+        ref: portfolioRef,
+      },
+    ]);
     return () => {};
   }, []);
 

@@ -101,7 +101,7 @@ const NavbarSection = observer(({ userStore }: { userStore: UserStore }) => {
   // );
   return (
     <div
-      className={`sticky top-0 z-50 bg-white shadow py-5 px-5 md:px-12 lg:py-12 lg:px-24`}
+      className={`sticky top-0 z-50 bg-white shadow py-5 px-5 md:px-12 lg:py-12 lg:px-24 font-poppins`}
     >
       <div className="flex flex-row justify-between items-center">
         <div
