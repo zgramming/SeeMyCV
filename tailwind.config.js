@@ -62,6 +62,7 @@ module.exports = {
         naraai: {
           "primary-100": "#E7E0FD",
           "primary-500": "#7562E0",
+          "gray-lighter-2": "#F7F9FC",
           "gray-1": "#333333",
           "gray-3": "#828282",
         },
