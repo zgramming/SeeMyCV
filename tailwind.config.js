@@ -88,6 +88,7 @@ module.exports = {
       fontFamily: {
         "josefin-sans": ["Josefin Sans", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
+        "dm-sans": ["DM Sans", "sans-serif"],
       },
     },
   },

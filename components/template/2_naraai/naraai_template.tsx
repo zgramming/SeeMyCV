@@ -1,14 +1,16 @@
-import { Button, Col, Row } from "antd";
-import Image from "next/image";
+import { Button, Col, Row } from 'antd';
+import Image from 'next/image';
 
-import { faFacebook } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Users } from "../../../interface/main_interface";
-import IconSocialMedia from "../../reusable/icon_social_media";
+import { Users } from '../../../interface/main_interface';
+import IconSocialMedia from '../../reusable/icon_social_media';
 
 const ProfileSection = () => {
   return (
-    <div className="min-h-screen py-12 px-5 md:px-12 lg:px-24 lg:py-24">
+    <div className="py-12 px-5 md:px-12 lg:px-24 lg:py-24">
       <Row align="top">
         <Col
           className="w-full order-2 pt-6 lg:pt-0 lg:order-1"
@@ -98,7 +100,89 @@ const ProfileSection = () => {
   );
 };
 const ExperienceSection = () => {
-  return <></>;
+  return (
+    <div className="flex flex-col px-5 md:px-12 lg:px-24">
+      <div className="text-center text-naraai-primary-500 text-4xl font-bold pb-8">
+        EXPERIENCES
+      </div>
+      <div className="grid grid-cols-1 gap-12 xl:grid-cols-2">
+        {Array.from<number>({ length: 10 }).map((val) => {
+          return (
+            <div key={val} className="flex flex-col space-y-5">
+              <div className="flex flex-row space-x-5">
+                <span>Mar 2022 - Present </span>
+                <div className="flex flex-row items-center space-x-3">
+                  <FontAwesomeIcon
+                    icon={faMapMarkerAlt}
+                    className="text-watanasa-gray-3"
+                  />
+                  <span>Jakarta</span>
+                </div>
+              </div>
+              <div className="flex flex-row items-center">
+                <div className="relative w-24 h-24">
+                  <Image
+                    alt="Image Loaded"
+                    src={`https://picsum.photos/800`}
+                    className="rounded shadow-xl"
+                    style={{ objectFit: "cover" }}
+                    fill
+                  />
+                </div>
+                <div className="flex flex-col space-y-5 pl-8">
+                  <span className="font-dm-sans text-naraai-gray-3 text-base">
+                    Nutech Integrasi
+                  </span>
+                  <span className="font-dm-sans text-naraai-gray-1 text-xl">
+                    UI/UX Designer
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {Array.from<number>({ length: 5 }).map((val) => {
+                      return (
+                        <div
+                          key={val}
+                          className="bg-naraai-primary-100 text-xs text-naraai-primary-500 rounded-lg p-1 xl:p-2"
+                        >
+                          SQL Server
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+              <div className="h-40 text-naraai-gray-3 text-sm overflow-clip xl:text-base">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Voluptas neque accusamus ad saepe, quaerat ipsum, eveniet harum
+                hic rem nesciunt ut eius natus modi. Ipsam est exercitationem
+                accusantium quo tempora? Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Voluptas neque accusamus ad saepe, quaerat
+                ipsum, eveniet harum hic rem nesciunt ut eius natus modi. Ipsam
+                est exercitationem accusantium quo tempora? Lorem ipsum dolor
+                sit amet consectetur adipisicing elit. Voluptas neque accusamus
+                ad saepe, quaerat ipsum, eveniet harum hic rem nesciunt ut eius
+                natus modi. Ipsam est exercitationem accusantium quo tempora?
+                Voluptas neque accusamus ad saepe, quaerat ipsum, eveniet harum
+                hic rem nesciunt ut eius natus modi. Ipsam est exercitationem
+                accusantium quo tempora? Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Voluptas neque accusamus ad saepe, quaerat
+                ipsum, eveniet harum hic rem nesciunt ut eius natus modi. Ipsam
+                est exercitationem accusantium quo tempora? Lorem ipsum dolor
+                sit amet consectetur adipisicing elit. Voluptas neque accusamus
+                ad saepe, quaerat ipsum, eveniet harum hic rem nesciunt ut eius
+                natus modi. Ipsam est exercitationem accusantium quo tempora?
+              </div>
+              <Button
+                type="link"
+                className="self-start text-naraai-primary-500 hover:text-naraai-primary-500 font-medium"
+              >
+                Continue Reading
+              </Button>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 };
 const EducationSection = () => {
   return <></>;
@@ -115,7 +199,7 @@ const LicenseCertificateSection = () => {
 
 const NaraaiTemplate = ({ user }: { user: Users }) => {
   return (
-    <div className="font-poppins">
+    <div className="font-poppins space-y-40">
       <ProfileSection />
       <ExperienceSection />
       <EducationSection />
