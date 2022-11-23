@@ -1,5 +1,6 @@
 import { Button, Col, notification, Row, Tooltip } from "antd";
 import { saveAs } from "file-saver";
+import { useEffect, useState } from "react";
 
 import {
   faFacebook,
@@ -10,6 +11,9 @@ import {
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { CvTemplateWebsiteInterface } from "../../../../interface/cv/cvtemplate_website_interface";
+import { UserStore } from "../../../../repository/user_store";
+
 const githubUrl = "https://github.com/zgramming";
 const webUrl = "https://seemycv.my.id/zeffry";
 const linkedInUrl = "https://www.linkedin.com/in/zeffry-reynando/";
@@ -19,9 +23,43 @@ const email = "zeffry.reynando@gmail.com";
 const pathPDF = "/pdf/zeffry_cv.pdf";
 const namePDF = "zeffry-reynando.pdf";
 
-const FooterSection = () => {
+const handlerFooterSetting = (
+  templateWebsite?: CvTemplateWebsiteInterface
+): { backgroundColor: string; textColor: string } => {
+  switch (templateWebsite?.template_website?.code) {
+    case "KODE_TEMPLATE_WEB_WATANASA":
+      return {
+        backgroundColor: "bg-watanasa-primary-500",
+        textColor: "text-watanasa-primary-500",
+      };
+    case "KODE_TEMPLATE_WEB_NARAAI":
+      return {
+        backgroundColor: "bg-naraai-primary-500",
+        textColor: "text-naraai-primary-500",
+      };
+    default:
+      return {
+        backgroundColor: "bg-default-spot-1",
+        textColor: "text-default-spot-1",
+      };
+  }
+};
+
+const FooterSection = ({ userStore }: { userStore: UserStore }) => {
+  const [footerSetting, setFooterSetting] = useState<
+    { backgroundColor: string; textColor: string } | undefined
+  >();
+  useEffect(() => {
+    if (userStore.item?.CVTemplateWebsite) {
+      setFooterSetting(handlerFooterSetting(userStore.item.CVTemplateWebsite));
+    }
+    return () => {};
+  }, [userStore.item?.CVTemplateWebsite]);
+
   return (
-    <div className="bg-watanasa-primary-500 py-24 px-5 md:px-12 lg:px-24 font-poppins">
+    <div
+      className={`${footerSetting?.backgroundColor} py-24 px-5 md:px-12 lg:px-24 font-poppins`}
+    >
       <Row>
         <Col sm={24} md={24} lg={13} className="w-full pr-0 lg:pr-10">
           <div className="flex flex-col text-white space-y-10">
@@ -36,7 +74,7 @@ const FooterSection = () => {
         <Col sm={24} md={24} lg={11} className="w-full pt-10 lg:pt-0">
           <div className="flex flex-col space-y-5">
             <Button
-              className="w-full border-solid border-white rounded-lg h-16 text-watanasa-primary-500 font-bold"
+              className={`w-full border-solid border-white rounded-lg h-16 ${footerSetting?.textColor} font-bold`}
               size="large"
               type="default"
               onClick={(e) => window.open(`mailto:${email}`)}
@@ -44,7 +82,7 @@ const FooterSection = () => {
               Contact Me
             </Button>
             <Button
-              className="w-full border-solid  font-bold rounded-lg h-16"
+              className={`w-full h-16 border-solid font-bold rounded-lg ${footerSetting?.backgroundColor} border-solid border-white`}
               size="large"
               type="primary"
               onClick={(e) => {

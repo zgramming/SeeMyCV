@@ -2,7 +2,11 @@ import { Button, Card, Col, Row } from "antd";
 import Image from "next/image";
 
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
-import { faClover, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBook,
+  faClover,
+  faMapMarkerAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { Users } from "../../../interface/main_interface";
@@ -60,7 +64,7 @@ const ProfileSection = () => {
                 <Button
                   type="primary"
                   size="large"
-                  className="h-14 w-full rounded-xl  bg-naraai-primary-500 border-naraai-primary-500 hover:bg-naraai-primary-100"
+                  className="h-14 w-full rounded-xl  bg-naraai-primary-500 border-naraai-primary-500 hover:bg-naraai-primary-500"
                 >
                   Contact Me
                 </Button>
@@ -80,12 +84,12 @@ const ProfileSection = () => {
                 return (
                   <div
                     key={val}
-                    className="w-14 h-14 flex flex-col items-center justify-center bg-naraai-primary-100 rounded-full"
+                    className="w-10 h-10 flex flex-col items-center justify-center bg-naraai-primary-100 rounded-full lg:w-14 lg:h-14"
                   >
                     <IconSocialMedia
                       title="Facebook"
                       icon={faFacebook}
-                      className="h-6 w-6 text-naraai-primary-500"
+                      className="h-4 w-4 text-naraai-primary-500 lg:h-6 lg:w-6"
                       onClick={() => {}}
                       visible
                     />
@@ -278,7 +282,7 @@ const PortfolioSection = () => {
       <div className="text-center text-naraai-primary-500 text-4xl font-bold pb-8">
         LATEST PROJECT
       </div>
-      <div className="grid grid-cols-1 gap-10 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
         {Array.from<number>({ length: 10 }).map((val) => {
           return (
             <Card
@@ -306,7 +310,7 @@ const PortfolioSection = () => {
                   />
                 </div>
                 <div className="flex flex-col space-y-5 px-4">
-                  <div className="text-naraai-gray-1 text-base font-medium">
+                  <div className="text-naraai-gray-1 text-base font-medium line-clamp-1">
                     How to prototype in figma
                   </div>
                   <div className="self-start bg-naraai-primary-100 text-naraai-primary-500 text-xs font-medium rounded-xl p-2">
@@ -335,7 +339,50 @@ const PortfolioSection = () => {
 };
 
 const LicenseCertificateSection = () => {
-  return <></>;
+  return (
+    <div className="flex flex-col bg-naraai-primary-100 py-24 px-5 md:px-12 lg:px-24">
+      <div className="text-center text-naraai-primary-500 text-4xl font-bold pb-14">
+        LICENSE & CERTIFICATION
+      </div>
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
+        {Array.from<number>({ length: 10 }).map((val) => {
+          return (
+            <Card key={val} className="rounded-xl">
+              <div className="flex flex-col">
+                <div className="self-center bg-naraai-primary-100 text-center rounded-xl border-solid border border-naraai-primary-500 p-4 mb-4">
+                  <FontAwesomeIcon
+                    icon={faBook}
+                    className="text-naraai-primary-500 h-8 w-8"
+                  />
+                </div>
+                <div className="flex flex-row justify-between items-center mb-2">
+                  <div className="text-naraai-primary-500 font-medium text-sm">
+                    Dicoding
+                  </div>
+                  <div className="text-naraai-gray-3 text-xs">
+                    August 2019 - August 2022
+                  </div>
+                </div>
+                <div className="text-naraai-gray-1 font-medium text-base mb-2">
+                  Menjadi Flutter Developer Expert (MFDE)
+                </div>
+                <div className="text-sm text-naraai-gray-3 underline font-medium mb-4 hover:cursor-pointer">
+                  Credential : GRX5KW0DYZ0M
+                </div>
+                <Button
+                  type="primary"
+                  size="large"
+                  className="w-full rounded text-xs bg-naraai-primary-500 border-none shadow hover:bg-naraai-primary-500"
+                >
+                  Download File
+                </Button>
+              </div>
+            </Card>
+          );
+        })}
+      </div>
+    </div>
+  );
 };
 
 const NaraaiTemplate = ({ user }: { user: Users }) => {

@@ -7,6 +7,7 @@ import { Waypoint } from "react-waypoint";
 import { EyeOutlined } from "@ant-design/icons";
 
 import { CVPortfolioInterface } from "../../../../interface/cv/cvportfolio_interface";
+import LogoPrimary from "../../../../public/images/logo_primary.png";
 import activeNavigationBarStore from "../../../../repository/active_navigationbar";
 
 const PortfolioSectionItem = (props: { portfolio: CVPortfolioInterface }) => {
@@ -29,7 +30,11 @@ const PortfolioSectionItem = (props: { portfolio: CVPortfolioInterface }) => {
       onMouseLeave={(e) => setIsShowMenu(false)}
     >
       <div className="w-full h-80">
-        <Image src={`${portfolio.thumbnail}`} alt="Image Portfolio" fill />
+        <Image
+          src={portfolio.thumbnail ? portfolio.thumbnail : LogoPrimary}
+          alt="Image Portfolio"
+          fill
+        />
       </div>
       <animated.div
         style={springProps}
