@@ -5,46 +5,9 @@ import { faBook, faClover } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { Users } from "../../../interface/main_interface";
-import ProfileSection from "./components/profile_section";
+import EducationSection from "./components/education_section";
 import ExperienceSection from "./components/experience_section";
-
-const EducationSection = () => {
-  return (
-    <div className="flex flex-col px-5 md:px-12 lg:px-24">
-      <div className="text-center text-naraai-primary-500 text-4xl font-bold pb-8">
-        EDUCATIONS
-      </div>
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 xl:grid-cols-3">
-        {Array.from<number>({ length: 10 }).map((val) => {
-          return (
-            <Card key={val} className="bg-naraai-gray-lighter-2">
-              <div className="flex flex-col">
-                <div className="flex flex-row items-center pb-3">
-                  <div className="relative w-16 h-16 ">
-                    <Image
-                      alt="Image Education"
-                      src={`https://picsum.photos/800`}
-                      className="rounded-lg shadow-lg"
-                      style={{ objectFit: "cover" }}
-                      fill
-                    />
-                  </div>
-                  <div className="text-naraai-gray-1 text-base font-medium pl-6 xl:text-xl">
-                    SMK Negeri 1 Kota Bekasi
-                  </div>
-                </div>
-                <div className="text-base font-medium pb-1 xl:text-xl">
-                  Rekayasa Perangkat Lunak
-                </div>
-                <div className="text-sm text-naraai-gray-3">2020 - present</div>
-              </div>
-            </Card>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
+import ProfileSection from "./components/profile_section";
 
 const SkillSection = () => {
   return (
@@ -208,7 +171,7 @@ const NaraaiTemplate = ({ user }: { user: Users }) => {
     <div className="font-poppins space-y-40">
       <ProfileSection user={user} />
       <ExperienceSection experience={user.CVExperience} />
-      <EducationSection />
+      <EducationSection educations={user.CVEducation} />
       <SkillSection />
       <PortfolioSection />
       <LicenseCertificateSection />
