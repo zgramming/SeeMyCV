@@ -97,12 +97,14 @@ const ProfileContent = ({
         />
       </div>
       <Space>
-        {profile?.phone && (
+        {email && (
           <Button
             type="primary"
             size="large"
             className="rounded-xl"
-            onClick={(e) => window.open(`tel:${profile.phone}`)}
+            onClick={(e) =>
+              window.open(`mailto:${email}?subject=DefaultSubject&body=Hello`)
+            }
           >
             Contact Me
           </Button>
