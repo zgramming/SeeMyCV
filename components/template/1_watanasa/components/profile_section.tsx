@@ -1,10 +1,9 @@
-import { Button, Card, Col, Row, Space, Tooltip } from "antd";
+import { Button, Card, Col, Row, Space } from "antd";
 import { saveAs } from "file-saver";
 import Image from "next/image";
 import { useState } from "react";
 
 import { WarningOutlined } from "@ant-design/icons";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import {
   faFacebook,
   faGithub,
@@ -25,8 +24,9 @@ const ProfileBackgroundImage = () => {
       <Image
         alt="Image Background"
         src={BGProfile}
-        fill
         style={{ objectFit: "cover" }}
+        loading="eager"
+        fill
       />
     </div>
   );
