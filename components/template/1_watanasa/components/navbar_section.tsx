@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 import { NavigationMenuInterface } from "../../../../interface/navigation_menu";
-import BarSVG from "../../../../public/template/watanasa/bar.svg";
+import BarSVG from "../../../../public/template/1_watanasa/bar.svg";
 import navigationScrollToComponent from "../../../../repository/navigation_scrollto_component";
 import { UserStore } from "../../../../repository/user_store";
 

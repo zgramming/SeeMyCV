@@ -15,7 +15,7 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 
 import { CVProfileInterface } from "../../../../interface/cv/cvprofile_interface";
 import { Users } from "../../../../interface/main_interface";
-import BGProfile from "../../../../public/template/watanasa/bg_profile.png";
+import BGProfile from "../../../../public/template/1_watanasa/bg_profile.png";
 import IconSocialMedia from "../../../reusable/icon_social_media";
 
 const ProfileBackgroundImage = () => {

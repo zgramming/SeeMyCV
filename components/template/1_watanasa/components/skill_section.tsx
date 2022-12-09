@@ -1,8 +1,6 @@
 import { Card } from "antd";
-import Image from "next/image";
 
 import { CVSkillInterface } from "../../../../interface/cv/cvskill_interface";
-import BGGradient from "../../../../public/template/watanasa/bg_gradient.png";
 
 const SkillItem = ({ skill }: { skill: CVSkillInterface }) => {
   return (
@@ -34,13 +32,11 @@ const SkillItem = ({ skill }: { skill: CVSkillInterface }) => {
 const SkillSection = ({ skills }: { skills: CVSkillInterface[] }) => {
   return (
     <div className="relative">
-      <div className="absolute top-0 left-0 right-0 bottom-0 z-[-1]">
-        <Image
-          alt="Image Skill"
-          src={BGGradient}
-          fill
-          style={{ objectFit: "cover" }}
-        />
+      <div className="absolute top-0 left-0 right-0 bottom-0 z-[-1]"
+      style={{
+        background :"linear-gradient(258.26deg, #69C0FF 0.95%, #096DD9 65.95%);"
+      }}
+      >
       </div>
       <div className="flex flex-col space-y-12 py-24 px-5 md:px-12 lg:px-24">
         <div className="font-semibold text-white text-4xl">

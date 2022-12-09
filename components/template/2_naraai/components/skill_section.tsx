@@ -15,6 +15,7 @@ const SkillSection = ({ skills }: { skills: CVSkillInterface[] }) => {
   const [groupingSkill, setGroupingSkill] = useState<
     GroupSkillInterface | undefined
   >(undefined);
+
   useEffect(() => {
     if (skills.length !== 0) {
       const result = skills.reduce((prev, current) => {
@@ -37,7 +38,7 @@ const SkillSection = ({ skills }: { skills: CVSkillInterface[] }) => {
       <div className="text-center text-naraai-primary-500 text-4xl font-bold pb-8">
         SPECIALIZING IN / SKILLS
       </div>
-      <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-4 xl:gap-20">
+      <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
         {groupingSkill &&
           Object.keys(groupingSkill).map((level) => {
             const skillItems = groupingSkill[level];
@@ -60,10 +61,13 @@ const SkillSection = ({ skills }: { skills: CVSkillInterface[] }) => {
                       {level}
                     </div>
                     <div className="grid grid-cols-2 gap-5">
-                      {skillItems.map((val) => {
+                      {skillItems.map((val, index) => {
                         return (
-                          <div key={val.id} className="text-naraai-gray-3">
-                            {val.name}
+                          <div
+                            key={val.id}
+                            className="text-naraai-gray-3 text-base lg:text-lg"
+                          >
+                            {`${val.name}`}
                           </div>
                         );
                       })}

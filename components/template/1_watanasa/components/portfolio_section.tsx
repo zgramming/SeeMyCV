@@ -6,7 +6,8 @@ import { useState } from "react";
 import { WarningOutlined } from "@ant-design/icons";
 
 import { CVPortfolioInterface } from "../../../../interface/cv/cvportfolio_interface";
-import BGGradient from "../../../../public/template/watanasa/bg_gradient.png";
+import Logo from "../../../../public/images/logo_primary.png";
+import { portfolioRoute } from "../../../../utils/routes";
 
 const PortfolioItem = ({ portfolio }: { portfolio: CVPortfolioInterface }) => {
   const { push, query } = useRouter();
@@ -24,7 +25,7 @@ const PortfolioItem = ({ portfolio }: { portfolio: CVPortfolioInterface }) => {
         margin: 0,
       }}
       className="shadow rounded-xl bg-watanasa-primary-900"
-      onClick={(e) => push(`/${username}/portfolio/${portfolio.slug}`)}
+      onClick={(e) => push(portfolioRoute(`${username}`, portfolio.slug))}
       hoverable
     >
       <div className="flex flex-col">
@@ -32,7 +33,7 @@ const PortfolioItem = ({ portfolio }: { portfolio: CVPortfolioInterface }) => {
           {!isImageError ? (
             <Image
               alt="Image Portfolio"
-              src={portfolio.thumbnail ?? BGGradient}
+              src={portfolio.thumbnail ?? Logo}
               className={`rounded-tl-xl rounded-tr-xl border-none`}
               style={{ objectFit: "cover" }}
               onError={(e) => setIsImageError(true)}
