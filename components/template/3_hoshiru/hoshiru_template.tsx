@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 
 import { Users } from "../../../interface/main_interface";
-
 import navigationScrollToComponent from "../../../repository/navigation_scrollto_component";
+import ExperienceSection from "./components/experience_section";
 import ProfileSection from "./components/profile_section";
 
 const HoshiruTemplate = ({ user }: { user: Users }) => {
@@ -41,9 +41,12 @@ const HoshiruTemplate = ({ user }: { user: Users }) => {
   }, []);
 
   return (
-    <div className="font-poppins space-y-40">
+    <div className="font-poppins">
       <div ref={profileRef}>
         <ProfileSection user={user} />
+      </div>
+      <div ref={experienceRef}>
+        <ExperienceSection experience={user.CVExperience} />
       </div>
     </div>
   );
