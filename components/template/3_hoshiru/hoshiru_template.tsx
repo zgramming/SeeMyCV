@@ -4,6 +4,8 @@ import { Users } from "../../../interface/main_interface";
 import navigationScrollToComponent from "../../../repository/navigation_scrollto_component";
 import EducationSection from "./components/education_section";
 import ExperienceSection from "./components/experience_section";
+import LicenseAndCertificateSection from "./components/license_certificate_section";
+import PortfolioSection from "./components/portfolio_section";
 import ProfileSection from "./components/profile_section";
 import SkillSection from "./components/skill_section";
 
@@ -55,6 +57,12 @@ const HoshiruTemplate = ({ user }: { user: Users }) => {
       </div>
       <div ref={skillRef}>
         <SkillSection skills={user.CVSkill} />
+      </div>
+      <div ref={portfolioRef}>
+        <PortfolioSection portfolios={user.CVPortfolio} />
+      </div>
+      <div ref={licenseCertificateRef}>
+        <LicenseAndCertificateSection licenses={user.CVLicenseCertificate} />
       </div>
     </div>
   );
