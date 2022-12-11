@@ -12,12 +12,13 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { CvTemplateWebsiteInterface } from "../../../../interface/cv/cvtemplate_website_interface";
-import userStore, { UserStore } from "../../../../repository/user_store";
+import { UserStore } from "../../../../repository/user_store";
 import {
   CODE_TEMPLATE_WEB_HOSHIRU,
   CODE_TEMPLATE_WEB_NARAAI,
   CODE_TEMPLATE_WEB_WATANASA,
 } from "../../../../utils/constant";
+import { observer } from "mobx-react-lite";
 
 const githubUrl = "https://github.com/zgramming";
 const webUrl = "https://seemycv.my.id/zeffry";
@@ -60,7 +61,7 @@ const handlerFooterSetting = (
   }
 };
 
-const FooterSection = () => {
+const FooterSection = observer(({ userStore }: { userStore: UserStore }) => {
   const [footerSetting, setFooterSetting] = useState<
     FooterSetting | undefined
   >();
@@ -70,7 +71,7 @@ const FooterSection = () => {
       setFooterSetting(handlerFooterSetting(userStore.item.CVTemplateWebsite));
     }
     return () => {};
-  }, []);
+  }, [userStore.item?.CVTemplateWebsite]);
 
   return (
     <div
@@ -158,6 +159,6 @@ const FooterSection = () => {
       </Row>
     </div>
   );
-};
+});
 
 export default FooterSection;
