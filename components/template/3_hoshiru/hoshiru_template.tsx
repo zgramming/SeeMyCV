@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react";
 
 import { Users } from "../../../interface/main_interface";
+
 import navigationScrollToComponent from "../../../repository/navigation_scrollto_component";
+import ProfileSection from "./components/profile_section";
 
 const HoshiruTemplate = ({ user }: { user: Users }) => {
   const profileRef = useRef(null);
@@ -38,6 +40,12 @@ const HoshiruTemplate = ({ user }: { user: Users }) => {
     return () => {};
   }, []);
 
-  return <div className="font-poppins space-y-40"></div>;
+  return (
+    <div className="font-poppins space-y-40">
+      <div ref={profileRef}>
+        <ProfileSection user={user} />
+      </div>
+    </div>
+  );
 };
 export default HoshiruTemplate;

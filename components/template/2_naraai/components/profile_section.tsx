@@ -114,8 +114,8 @@ const ProfileSection = ({ user }: { user: Users }) => {
                   <IconSocialMedia
                     title="Twitter"
                     icon={faTwitter}
-                    className="h-4 w-4 text-naraai-primary-500 lg:h-6 lg:w-6"
                     onClick={() => window.open(profile?.twitter)}
+                    className="h-4 w-4 text-naraai-primary-500 lg:h-6 lg:w-6"
                     visible
                   />
                 </div>
@@ -129,8 +129,8 @@ const ProfileSection = ({ user }: { user: Users }) => {
                   <IconSocialMedia
                     title="Facebook"
                     icon={faFacebook}
-                    className="h-4 w-4 text-naraai-primary-500 lg:h-6 lg:w-6"
                     onClick={() => window.open(profile?.facebook)}
+                    className="h-4 w-4 text-naraai-primary-500 lg:h-6 lg:w-6"
                     visible
                   />
                 </div>
@@ -144,8 +144,8 @@ const ProfileSection = ({ user }: { user: Users }) => {
                   <IconSocialMedia
                     title="Instagram"
                     icon={faInstagram}
-                    className="h-4 w-4 text-naraai-primary-500 lg:h-6 lg:w-6"
                     onClick={() => window.open(profile?.instagram)}
+                    className="h-4 w-4 text-naraai-primary-500 lg:h-6 lg:w-6"
                     visible
                   />
                 </div>
@@ -159,8 +159,8 @@ const ProfileSection = ({ user }: { user: Users }) => {
                   <IconSocialMedia
                     title="LinkedIn"
                     icon={faLinkedin}
-                    className="h-4 w-4 text-naraai-primary-500 lg:h-6 lg:w-6"
                     onClick={() => window.open(profile?.linkedIn)}
+                    className="h-4 w-4 text-naraai-primary-500 lg:h-6 lg:w-6"
                     visible
                   />
                 </div>
@@ -174,8 +174,8 @@ const ProfileSection = ({ user }: { user: Users }) => {
                   <IconSocialMedia
                     title="Github"
                     icon={faGithub}
-                    className="h-4 w-4 text-naraai-primary-500 lg:h-6 lg:w-6"
                     onClick={() => window.open(profile?.github)}
+                    className="h-4 w-4 text-naraai-primary-500 lg:h-6 lg:w-6"
                     visible
                   />
                 </div>
