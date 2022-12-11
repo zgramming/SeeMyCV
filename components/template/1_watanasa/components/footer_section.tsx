@@ -12,7 +12,12 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { CvTemplateWebsiteInterface } from "../../../../interface/cv/cvtemplate_website_interface";
-import { UserStore } from "../../../../repository/user_store";
+import userStore, { UserStore } from "../../../../repository/user_store";
+import {
+  CODE_TEMPLATE_WEB_HOSHIRU,
+  CODE_TEMPLATE_WEB_NARAAI,
+  CODE_TEMPLATE_WEB_WATANASA,
+} from "../../../../utils/constant";
 
 const githubUrl = "https://github.com/zgramming";
 const webUrl = "https://seemycv.my.id/zeffry";
@@ -23,19 +28,29 @@ const email = "zeffry.reynando@gmail.com";
 const pathPDF = "/pdf/zeffry_cv.pdf";
 const namePDF = "zeffry-reynando.pdf";
 
+type FooterSetting = {
+  backgroundColor: string;
+  textColor: string;
+};
+
 const handlerFooterSetting = (
   templateWebsite?: CvTemplateWebsiteInterface
-): { backgroundColor: string; textColor: string } => {
+): FooterSetting => {
   switch (templateWebsite?.template_website?.code) {
-    case "KODE_TEMPLATE_WEB_WATANASA":
+    case CODE_TEMPLATE_WEB_WATANASA:
       return {
-        backgroundColor: "bg-watanasa-primary-500",
-        textColor: "text-watanasa-primary-500",
+        backgroundColor: "bg-watanasa-primary-600",
+        textColor: "text-watanasa-primary-600",
       };
-    case "KODE_TEMPLATE_WEB_NARAAI":
+    case CODE_TEMPLATE_WEB_NARAAI:
       return {
-        backgroundColor: "bg-naraai-primary-500",
-        textColor: "text-naraai-primary-500",
+        backgroundColor: "bg-naraai-primary-600",
+        textColor: "text-naraai-primary-600",
+      };
+    case CODE_TEMPLATE_WEB_HOSHIRU:
+      return {
+        backgroundColor: "bg-hoshiru-primary-600",
+        textColor: "text-hoshiru-primary-600",
       };
     default:
       return {
@@ -45,16 +60,17 @@ const handlerFooterSetting = (
   }
 };
 
-const FooterSection = ({ userStore }: { userStore: UserStore }) => {
+const FooterSection = () => {
   const [footerSetting, setFooterSetting] = useState<
-    { backgroundColor: string; textColor: string } | undefined
+    FooterSetting | undefined
   >();
+
   useEffect(() => {
     if (userStore.item?.CVTemplateWebsite) {
       setFooterSetting(handlerFooterSetting(userStore.item.CVTemplateWebsite));
     }
     return () => {};
-  }, [userStore.item?.CVTemplateWebsite]);
+  }, []);
 
   return (
     <div
@@ -88,11 +104,13 @@ const FooterSection = ({ userStore }: { userStore: UserStore }) => {
               onClick={(e) => {
                 try {
                   saveAs(pathPDF, namePDF);
-                  notification.info({
+                  notification.success({
                     message: "Berhasil download CV",
                   });
                 } catch (error) {
-                  alert("error");
+                  notification.error({
+                    message: "Error occured on download CV",
+                  });
                 }
               }}
             >

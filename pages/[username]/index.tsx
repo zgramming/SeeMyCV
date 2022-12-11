@@ -9,16 +9,24 @@ import { ReactElement, useEffect } from "react";
 import CustomLayout from "../../components/layout/custom_layout";
 import WatanasaTemplate from "../../components/template/1_watanasa/watanasa_template";
 import NaraaiTemplate from "../../components/template/2_naraai/naraai_template";
+import HoshiruTemplate from "../../components/template/3_hoshiru/hoshiru_template";
 import DefaultTemplateWebsite from "../../components/template/default/default_template_website";
 import { Users } from "../../interface/main_interface";
 import userStore from "../../repository/user_store";
+import {
+  CODE_TEMPLATE_WEB_HOSHIRU,
+  CODE_TEMPLATE_WEB_NARAAI,
+  CODE_TEMPLATE_WEB_WATANASA,
+} from "../../utils/constant";
 
 const HandlerTemplate = ({ user }: { user: Users }) => {
   switch (user.CVTemplateWebsite?.template_website?.code) {
-    case "KODE_TEMPLATE_WEB_WATANASA":
+    case CODE_TEMPLATE_WEB_WATANASA:
       return <WatanasaTemplate user={user} />;
-    case "KODE_TEMPLATE_WEB_NARAAI":
+    case CODE_TEMPLATE_WEB_NARAAI:
       return <NaraaiTemplate user={user} />;
+    case CODE_TEMPLATE_WEB_HOSHIRU:
+      return <HoshiruTemplate user={user} />;
 
     default:
       return <DefaultTemplateWebsite user={user} />;

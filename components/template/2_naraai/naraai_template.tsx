@@ -43,6 +43,7 @@ const NaraaiTemplate = ({ user }: { user: Users }) => {
     ]);
     return () => {};
   }, []);
+  
   return (
     <div className="font-poppins space-y-40">
       {user.CVProfile && (

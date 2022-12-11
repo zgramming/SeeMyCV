@@ -172,7 +172,7 @@ const ProfileSection = ({ user }: { user: Users }) => {
                   className="w-10 h-10 flex flex-col items-center justify-center bg-naraai-primary-100 rounded-full lg:w-14 lg:h-14"
                 >
                   <IconSocialMedia
-                    title="LinkedIn"
+                    title="Github"
                     icon={faGithub}
                     className="h-4 w-4 text-naraai-primary-500 lg:h-6 lg:w-6"
                     onClick={() => window.open(profile?.github)}

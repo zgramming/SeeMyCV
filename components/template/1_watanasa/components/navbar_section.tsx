@@ -2,12 +2,18 @@ import { Drawer } from "antd";
 import { observer } from "mobx-react-lite";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+import { CvTemplateWebsiteInterface } from "../../../../interface/cv/cvtemplate_website_interface";
 import { NavigationMenuInterface } from "../../../../interface/navigation_menu";
 import BarSVG from "../../../../public/template/1_watanasa/bar.svg";
 import navigationScrollToComponent from "../../../../repository/navigation_scrollto_component";
-import { UserStore } from "../../../../repository/user_store";
+import userStore, { UserStore } from "../../../../repository/user_store";
+import {
+  CODE_TEMPLATE_WEB_HOSHIRU,
+  CODE_TEMPLATE_WEB_NARAAI,
+  CODE_TEMPLATE_WEB_WATANASA,
+} from "../../../../utils/constant";
 
 const menus: NavigationMenuInterface[] = [
   { name: "Experience", code: "experience" },
@@ -17,8 +23,41 @@ const menus: NavigationMenuInterface[] = [
   { name: "License & Certification", code: "l&c" },
 ];
 
-const NavbarDrawerSection = () => {
+type NavbarSetting = {
+  backgroundColor: string;
+  textColor: string;
+};
+
+const handlerNavbarSetting = (
+  templateWebsite?: CvTemplateWebsiteInterface
+): NavbarSetting => {
+  switch (templateWebsite?.template_website?.code) {
+    case CODE_TEMPLATE_WEB_WATANASA:
+      return {
+        backgroundColor: "bg-watanasa-primary-600",
+        textColor: "text-watanasa-primary-600",
+      };
+    case CODE_TEMPLATE_WEB_NARAAI:
+      return {
+        backgroundColor: "bg-naraai-primary-600",
+        textColor: "text-naraai-primary-600",
+      };
+    case CODE_TEMPLATE_WEB_HOSHIRU:
+      return {
+        backgroundColor: "bg-hoshiru-primary-600",
+        textColor: "text-hoshiru-primary-600",
+      };
+    default:
+      return {
+        backgroundColor: "bg-default-spot-1",
+        textColor: "text-default-spot-1",
+      };
+  }
+};
+
+const NavbarDrawerSection = ({ setting }: { setting?: NavbarSetting }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   return (
     <div className="block lg:hidden">
       <div
@@ -32,7 +71,7 @@ const NavbarDrawerSection = () => {
       <Drawer
         title={
           <div
-            className="text-watanasa-primary-500 font-medium hover:cursor-pointer"
+            className={`${setting?.textColor} font-medium hover:cursor-pointer`}
             onClick={(e) => navigationScrollToComponent.scrollTo("profile")}
           >
             SeeMyCV
@@ -58,7 +97,7 @@ const NavbarDrawerSection = () => {
   );
 };
 
-const NavbarItems = () => {
+const NavbarItems = ({ setting }: { setting?: NavbarSetting }) => {
   return (
     <div className="hidden lg:block">
       <div className="flex flex-wrap items-center space-x-10 list-none text-watanasa-gray-3 lg:text-base xl:text-xl">
@@ -66,7 +105,7 @@ const NavbarItems = () => {
           return (
             <div
               key={val.code}
-              className="hover:cursor-pointer hover:text-watanasa-primary-500  hover:border-solid hover:border-0 hover:border-b-2"
+              className={`hover:cursor-pointer hover:${setting?.textColor} hover:border-solid hover:border-0 hover:border-b-2`}
               onClick={(e) => navigationScrollToComponent.scrollTo(val.code)}
             >
               {val.name}
@@ -81,24 +120,16 @@ const NavbarItems = () => {
 const NavbarSection = observer(({ userStore }: { userStore: UserStore }) => {
   const { query, push } = useRouter();
   const { slug, username } = query;
+  const [navbarSetting, setNavbarSetting] = useState<
+    NavbarSetting | undefined
+  >();
 
-  // const {
-  //   data: dataUser,
-  //   mutate: reloadUser,
-  //   isValidating: isLoadingUser,
-  //   error,
-  // } = useSWR(
-  //   [`${process.env.NEXT_PUBLIC_BASEAPIURL}/v1/user/${username}`],
-  //   async (url) => {
-  //     const response = await axios.get(url);
-  //     const {
-  //       success,
-  //       message,
-  //       data,
-  //     }: { success: boolean; message: string; data: Users } = response.data;
-  //     return data;
-  //   }
-  // );
+  useEffect(() => {
+    if (userStore.item?.CVTemplateWebsite) {
+      setNavbarSetting(handlerNavbarSetting(userStore.item.CVTemplateWebsite));
+    }
+    return () => {};
+  }, [userStore.item?.CVTemplateWebsite]);
   return (
     <div
       className={`sticky top-0 z-50 bg-white shadow py-5 px-5 md:px-12 lg:py-12 lg:px-24 font-poppins`}
@@ -106,7 +137,7 @@ const NavbarSection = observer(({ userStore }: { userStore: UserStore }) => {
       <div className="flex flex-row justify-between items-center">
         <div
           className={`
-            font-medium text-2xl text-watanasa-primary-500 lg:text-4xl
+            font-medium text-2xl ${navbarSetting?.textColor} lg:text-4xl
             hover:cursor-pointer
         `}
           onClick={(e) => {
@@ -120,8 +151,8 @@ const NavbarSection = observer(({ userStore }: { userStore: UserStore }) => {
         >
           SeeMyCV
         </div>
-        <NavbarDrawerSection />
-        <NavbarItems />
+        <NavbarDrawerSection setting={navbarSetting} />
+        <NavbarItems setting={navbarSetting} />
       </div>
     </div>
   );
