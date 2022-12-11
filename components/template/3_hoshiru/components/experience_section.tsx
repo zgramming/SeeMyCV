@@ -58,7 +58,7 @@ const ExperienceItem = ({
           return (
             <div
               key={val}
-              className="bg-hoshiru-primary-100 text-xs text-hoshiru-primary-600 rounded-lg p-1 xl:p-2"
+              className="bg-hoshiru-primary-100 font-semibold text-xs text-hoshiru-primary-600 rounded-lg p-1 xl:p-2"
             >
               {val}
             </div>
@@ -68,9 +68,18 @@ const ExperienceItem = ({
     );
   };
 
+  const Lines = () => {
+    return (
+      <div className="hidden relative min-h-full lg:block">
+        <div className="absolute top-0 bottom-0 left-1 right-0 mx-auto w-1 border-0 border-dotted border-l-2 border-l-hoshiru-primary-900 " />
+        <Avatar className="bg-hoshiru-primary-900" size={"small"} />
+      </div>
+    );
+  };
+
   return (
     <>
-      <Col md={24} lg={8} xl={8} className="w-full pb-10">
+      <Col md={24} lg={10} xl={8} className="w-full pb-10">
         <div className="flex flex-row">
           <div className="basis-full flex flex-col space-y-5">
             <div className="flex flex-row space-x-3">
@@ -95,16 +104,13 @@ const ExperienceItem = ({
             </div>
             <TagList />
           </div>
-          <div className="relative min-h-full">
-            <div className="absolute top-0 bottom-0 left-1 right-0 mx-auto w-1 border-0 border-dotted border-l-2 border-l-hoshiru-primary-900 ">
-              s
-            </div>
-            <Avatar className="bg-hoshiru-primary-900" size={"small"} />
-          </div>
         </div>
       </Col>
-      <Col md={24} lg={16} xl={16} className="w-full">
-        <div dangerouslySetInnerHTML={{ __html: experience.description }} />
+      <Col md={24} lg={14} xl={16} className="w-full">
+        <div className="flex flex-row space-x-5">
+          <Lines />
+          <div dangerouslySetInnerHTML={{ __html: experience.description }} />
+        </div>
       </Col>
     </>
   );
