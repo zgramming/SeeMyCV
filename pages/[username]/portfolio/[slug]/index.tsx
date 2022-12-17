@@ -38,7 +38,7 @@ const Page = ({ portfolio }: { portfolio: CVPortfolioInterface }) => {
         <meta property="og:image:alt" content="SeeMyCV" />
         <meta property="og:description" content={portfolio.description} />
       </Head>
-      <div className="min-h-[60vh] flex flex-col space-y-5 py-12 px-5 md:px-12 lg:px-24">
+      <div className="min-h-[60vh] flex flex-col space-y-5 font-poppins py-12 px-5 md:px-12 lg:px-24">
         <div className="text-watanasa-gray-3 text-base">
           {createdDate.toLocaleDateString("id-ID", {
             month: "long",

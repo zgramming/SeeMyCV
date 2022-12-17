@@ -1,6 +1,8 @@
 import { Button, Col, notification, Row, Tooltip } from "antd";
 import { saveAs } from "file-saver";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import useSWR from "swr";
 
 import {
   faFacebook,
@@ -12,14 +14,13 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { CvTemplateWebsiteInterface } from "../../../../interface/cv/cvtemplate_website_interface";
-import { UserStore } from "../../../../repository/user_store";
 import {
   CODE_TEMPLATE_WEB_HOSHIRU,
   CODE_TEMPLATE_WEB_NARAAI,
   CODE_TEMPLATE_WEB_WATANASA,
   CODE_TEMPLATE_WEB_YAMAKO,
 } from "../../../../utils/constant";
-import { observer } from "mobx-react-lite";
+import { templateWebsiteFetcher } from "../../../../utils/fetcher";
 
 const githubUrl = "https://github.com/zgramming";
 const webUrl = "https://seemycv.my.id/zeffry";
@@ -67,17 +68,28 @@ const handlerFooterSetting = (
   }
 };
 
-const FooterSection = observer(({ userStore }: { userStore: UserStore }) => {
+const FooterSection = () => {
+  const { query } = useRouter();
+  const { username } = query;
   const [footerSetting, setFooterSetting] = useState<
     FooterSetting | undefined
   >();
 
+  const {
+    data: templateWebsite,
+    isLoading: isLoadingTemplateWebsite,
+    mutate: reloadTemplateWebsite,
+  } = useSWR(
+    [`cv/preview/website/username/${username}`],
+    templateWebsiteFetcher
+  );
+
   useEffect(() => {
-    if (userStore.item?.CVTemplateWebsite) {
-      setFooterSetting(handlerFooterSetting(userStore.item.CVTemplateWebsite));
+    if (templateWebsite) {
+      setFooterSetting(handlerFooterSetting(templateWebsite));
     }
     return () => {};
-  }, [userStore.item?.CVTemplateWebsite]);
+  }, [templateWebsite]);
 
   return (
     <div
@@ -165,6 +177,6 @@ const FooterSection = observer(({ userStore }: { userStore: UserStore }) => {
       </Row>
     </div>
   );
-});
+};
 
 export default FooterSection;
