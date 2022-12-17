@@ -8,7 +8,7 @@ import { CvTemplateWebsiteInterface } from "../../../../interface/cv/cvtemplate_
 import { NavigationMenuInterface } from "../../../../interface/navigation_menu";
 import BarSVG from "../../../../public/template/1_watanasa/bar.svg";
 import navigationScrollToComponent from "../../../../repository/navigation_scrollto_component";
-import userStore, { UserStore } from "../../../../repository/user_store";
+import { UserStore } from "../../../../repository/user_store";
 import {
   CODE_TEMPLATE_WEB_HOSHIRU,
   CODE_TEMPLATE_WEB_NARAAI,
@@ -84,7 +84,7 @@ const NavbarDrawerSection = ({ setting }: { setting?: NavbarSetting }) => {
         {menus.map((val, index) => {
           return (
             <p
-              className="font-medium text-base text-watanasa-gray-3 hover:cursor-pointer"
+              className="font-medium text-base text-naraai-gray-1 hover:cursor-pointer"
               key={val.code}
               onClick={(e) => navigationScrollToComponent.scrollTo(val.code)}
             >
@@ -100,7 +100,7 @@ const NavbarDrawerSection = ({ setting }: { setting?: NavbarSetting }) => {
 const NavbarItems = ({ setting }: { setting?: NavbarSetting }) => {
   return (
     <div className="hidden lg:block">
-      <div className="flex flex-wrap items-center space-x-10 list-none text-watanasa-gray-3 lg:text-base xl:text-xl">
+      <div className="flex flex-wrap items-center space-x-10 list-none text-naraai-gray-1 lg:text-base xl:text-xl">
         {menus.map((val) => {
           return (
             <div

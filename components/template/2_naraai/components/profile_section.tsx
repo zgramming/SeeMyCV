@@ -29,7 +29,7 @@ const ProfileSection = ({ user }: { user: Users }) => {
         >
           <div className="relative h-[28rem]">
             <div className="absolute bottom-0 right-0 left-0 h-48 bg-naraai-primary-100 rounded-xl"></div>
-            <div className="relative flex flex-row h-[25rem] w-64 bg-naraai-primary-500 rounded-xl mx-auto">
+            <div className="h-[25rem] w-64 relative flex flex-row bg-naraai-primary-500 rounded-xl mx-auto">
               <Image
                 alt="Image"
                 src={profile?.image ? profile.image : LogoPrimary}
