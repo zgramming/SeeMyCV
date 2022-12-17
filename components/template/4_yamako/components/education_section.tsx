@@ -35,7 +35,7 @@ const EducationSection = ({
       <div className="text-gray-1 font-medium font-outfit text-3xl 2xl:text-4xl">
         Education
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 xl:grid-cols-3 2xl:grid-cols-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 xl:grid-cols-3">
         {educations.map((val, index) => {
           return <EducationItem key={val.id} education={val} />;
         })}
