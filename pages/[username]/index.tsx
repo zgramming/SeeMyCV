@@ -38,7 +38,7 @@ const HandlerTemplate = ({ user }: { user: Users }) => {
 };
 
 const Page = ({ user }: { user: Users }) => {
-  const { query, replace, asPath } = useRouter();
+  const { query, replace } = useRouter();
 
   useEffect(() => {
     if (user) {
@@ -96,8 +96,6 @@ Page.getLayout = function getLayout(page: ReactElement) {
   return <CustomLayout>{page}</CustomLayout>;
 };
 
-export default Page;
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const params = context.params;
   const username = params?.username;
@@ -121,3 +119,5 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 };
+
+export default Page;

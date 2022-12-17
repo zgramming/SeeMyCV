@@ -1,20 +1,20 @@
 import { Drawer } from "antd";
-import { observer } from "mobx-react-lite";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import useSWR from "swr";
 
 import { CvTemplateWebsiteInterface } from "../../../../interface/cv/cvtemplate_website_interface";
 import { NavigationMenuInterface } from "../../../../interface/navigation_menu";
 import BarSVG from "../../../../public/template/1_watanasa/bar.svg";
 import navigationScrollToComponent from "../../../../repository/navigation_scrollto_component";
-import { UserStore } from "../../../../repository/user_store";
 import {
   CODE_TEMPLATE_WEB_HOSHIRU,
   CODE_TEMPLATE_WEB_NARAAI,
   CODE_TEMPLATE_WEB_WATANASA,
   CODE_TEMPLATE_WEB_YAMAKO,
 } from "../../../../utils/constant";
+import { templateWebsiteFetcher } from "../../../../utils/fetcher";
 
 const menus: NavigationMenuInterface[] = [
   { name: "Experience", code: "experience" },
@@ -123,19 +123,30 @@ const NavbarItems = ({ setting }: { setting?: NavbarSetting }) => {
   );
 };
 
-const NavbarSection = observer(({ userStore }: { userStore: UserStore }) => {
+const NavbarSection = () => {
   const { query, push } = useRouter();
   const { slug, username } = query;
   const [navbarSetting, setNavbarSetting] = useState<
     NavbarSetting | undefined
   >();
 
+  const {
+    data: templateWebsite,
+    isLoading: isLoadingTemplateWebsite,
+    mutate: reloadTemplateWebsite,
+  } = useSWR(
+    [`cv/preview/website/username/${username}`],
+    templateWebsiteFetcher
+  );
+
   useEffect(() => {
-    if (userStore.item?.CVTemplateWebsite) {
-      setNavbarSetting(handlerNavbarSetting(userStore.item.CVTemplateWebsite));
+    if (templateWebsite) {
+      setNavbarSetting(handlerNavbarSetting(templateWebsite));
     }
+
     return () => {};
-  }, [userStore.item?.CVTemplateWebsite]);
+  }, [templateWebsite]);
+
   return (
     <div
       className={`sticky top-0 z-50 bg-white shadow py-5 px-5 md:px-12 lg:py-12 lg:px-24 font-poppins`}
@@ -162,6 +173,6 @@ const NavbarSection = observer(({ userStore }: { userStore: UserStore }) => {
       </div>
     </div>
   );
-});
+};
 
 export default NavbarSection;
