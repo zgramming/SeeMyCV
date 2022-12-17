@@ -84,7 +84,7 @@ const ExperienceSection = ({
 }) => {
   return (
     <div className="flex flex-col gap-10 px-5 py-12 md:px-12 lg:py-12 lg:px-24">
-      <div className="text-gray-1 font-medium font-outfit 2xl:text-4xl">
+      <div className="text-gray-1 font-medium font-outfit text-3xl 2xl:text-4xl">
         Experience
       </div>
       <Row gutter={24} align="stretch">
