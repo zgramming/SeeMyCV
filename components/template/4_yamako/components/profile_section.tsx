@@ -48,60 +48,72 @@ const ProfileSection = ({ user }: { user: Users }) => {
               </div>
             </div>
             <div className="flex flex-row items-center justify-evenly">
-              <div className={`${iconClassName}`}>
-                <IconSocialMedia
-                  title="Web"
-                  visible={profile?.web ? true : false}
-                  icon={faGlobe}
-                  className="h-full w-full text-gray-1"
-                  onClick={() => window.open(profile?.web)}
-                />
-              </div>
-              <div className={`${iconClassName}`}>
-                <IconSocialMedia
-                  title="Twitter"
-                  visible={profile?.twitter ? true : false}
-                  icon={faTwitter}
-                  className="h-full w-full text-gray-1"
-                  onClick={() => window.open(profile?.twitter)}
-                />
-              </div>
-              <div className={`${iconClassName}`}>
-                <IconSocialMedia
-                  title="Facebook"
-                  visible={profile?.facebook ? true : false}
-                  icon={faFacebook}
-                  className="h-full w-full text-gray-1"
-                  onClick={() => window.open(profile?.facebook)}
-                />
-              </div>
-              <div className={`${iconClassName}`}>
-                <IconSocialMedia
-                  title="Instagram"
-                  visible={profile?.instagram ? true : false}
-                  icon={faInstagram}
-                  className="h-full w-full text-gray-1"
-                  onClick={() => window.open(profile?.instagram)}
-                />
-              </div>
-              <div className={`${iconClassName}`}>
-                <IconSocialMedia
-                  title="LinkedIn"
-                  visible={profile?.linkedIn ? true : false}
-                  icon={faLinkedin}
-                  className="h-full w-full text-gray-1"
-                  onClick={() => window.open(profile?.linkedIn)}
-                />
-              </div>
-              <div className={`${iconClassName}`}>
-                <IconSocialMedia
-                  title="Github"
-                  visible={profile?.github ? true : false}
-                  icon={faGithub}
-                  className="h-full w-full text-gray-1"
-                  onClick={() => window.open(profile?.github)}
-                />
-              </div>
+              {profile?.web && (
+                <div className={`${iconClassName}`}>
+                  <IconSocialMedia
+                    title="Web"
+                    visible={profile?.web ? true : false}
+                    icon={faGlobe}
+                    className="h-full w-full text-gray-1"
+                    onClick={() => window.open(profile?.web)}
+                  />
+                </div>
+              )}
+              {profile?.twitter && (
+                <div className={`${iconClassName}`}>
+                  <IconSocialMedia
+                    title="Twitter"
+                    visible={profile?.twitter ? true : false}
+                    icon={faTwitter}
+                    className="h-full w-full text-gray-1"
+                    onClick={() => window.open(profile?.twitter)}
+                  />
+                </div>
+              )}
+              {profile?.facebook && (
+                <div className={`${iconClassName}`}>
+                  <IconSocialMedia
+                    title="Facebook"
+                    visible={profile?.facebook ? true : false}
+                    icon={faFacebook}
+                    className="h-full w-full text-gray-1"
+                    onClick={() => window.open(profile?.facebook)}
+                  />
+                </div>
+              )}
+              {profile?.instagram && (
+                <div className={`${iconClassName}`}>
+                  <IconSocialMedia
+                    title="Instagram"
+                    visible={profile?.instagram ? true : false}
+                    icon={faInstagram}
+                    className="h-full w-full text-gray-1"
+                    onClick={() => window.open(profile?.instagram)}
+                  />
+                </div>
+              )}
+              {profile?.linkedIn && (
+                <div className={`${iconClassName}`}>
+                  <IconSocialMedia
+                    title="LinkedIn"
+                    visible={profile?.linkedIn ? true : false}
+                    icon={faLinkedin}
+                    className="h-full w-full text-gray-1"
+                    onClick={() => window.open(profile?.linkedIn)}
+                  />
+                </div>
+              )}
+              {profile?.github && (
+                <div className={`${iconClassName}`}>
+                  <IconSocialMedia
+                    title="Github"
+                    visible={profile?.github ? true : false}
+                    icon={faGithub}
+                    className="h-full w-full text-gray-1"
+                    onClick={() => window.open(profile?.github)}
+                  />
+                </div>
+              )}
             </div>
             <Row gutter={24} align="middle" className="gap-5 lg:gap-0">
               {profile?.latest_resume && (
