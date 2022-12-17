@@ -71,6 +71,18 @@ const ExperienceItem = ({
             className="text-gray-7 text-sm leading-loose text-justify 2xl:text-base"
             dangerouslySetInnerHTML={{ __html: experience.description }}
           />
+          <div className="flex flex-wrap gap-2">
+            {tags.map((tag, index) => {
+              return (
+                <div
+                  key={`${tag}_${index}`}
+                  className="rounded-full bg-gray-1 text-white py-1 px-2 2xl:text-xs"
+                >
+                  {tag}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </Col>
     </>
