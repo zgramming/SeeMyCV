@@ -21,7 +21,7 @@ const ProfileSection = ({ user }: { user: Users }) => {
   return (
     <div className="px-5 py-12 md:px-12 lg:py-12 lg:px-24">
       <Row gutter={24} align="middle">
-        <Col md={24} lg={12} xl={10} className="w-full pb-10 lg:pb-0">
+        <Col span={24} md={24} lg={12} xl={10} className="pb-10 lg:pb-0">
           <div className="flex flex-col space-y-5 lg:flex-row lg:items-center lg:space-x-5">
             <div className="flex flex-row justify-evenly lg:flex-col lg:space-y-5">
               {profile?.web && (
@@ -79,7 +79,7 @@ const ProfileSection = ({ user }: { user: Users }) => {
                 />
               )}
             </div>
-            <div className="relative flex flex-row justify-center w-full h-96 md:h-[30rem] xl:h-[35rem] ">
+            <div className="relative flex flex-row justify-center w-full h-96">
               <div className="absolute top-0 left-0 right-0 bottom-0">
                 <div className="relative w-full h-full">
                   <Image
@@ -90,7 +90,7 @@ const ProfileSection = ({ user }: { user: Users }) => {
                   />
                 </div>
               </div>
-              <div className="relative w-3/4 md:w-1/2 lg:w-4/5 xl:w-3/4 2xl:w-3/5">
+              <div className="relative h-full aspect-[3/4]">
                 <Image
                   alt="Image Profile"
                   src={profile?.image ?? Logo}
@@ -102,7 +102,7 @@ const ProfileSection = ({ user }: { user: Users }) => {
             </div>
           </div>
         </Col>
-        <Col md={24} lg={12} xl={14} className="w-full">
+        <Col span={24} md={24} lg={12} xl={14}>
           <div className="flex flex-col space-y-5">
             <div className="font-semibold text-5xl text-hoshiru-primary-700 text-center">
               {user.name}
@@ -161,4 +161,5 @@ const ProfileSection = ({ user }: { user: Users }) => {
     </div>
   );
 };
+
 export default ProfileSection;

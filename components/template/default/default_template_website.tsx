@@ -5,7 +5,6 @@ import navigationScrollToComponent from "../../../repository/navigation_scrollto
 import EducationSection from "./components/education_section";
 import ExperienceSection from "./components/experience_section";
 import LicenseAndCertificateSection from "./components/license_certificate_section";
-import DefaultTemplateNavbar from "./components/navigationbar";
 import PortfolioSection from "./components/portfolio_section";
 import ProfileSection from "./components/profile_section";
 import SkillSection from "./components/skill_section";
