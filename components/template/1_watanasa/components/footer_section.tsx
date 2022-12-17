@@ -17,6 +17,7 @@ import {
   CODE_TEMPLATE_WEB_HOSHIRU,
   CODE_TEMPLATE_WEB_NARAAI,
   CODE_TEMPLATE_WEB_WATANASA,
+  CODE_TEMPLATE_WEB_YAMAKO,
 } from "../../../../utils/constant";
 import { observer } from "mobx-react-lite";
 
@@ -52,6 +53,11 @@ const handlerFooterSetting = (
       return {
         backgroundColor: "bg-hoshiru-primary-600",
         textColor: "text-hoshiru-primary-600",
+      };
+    case CODE_TEMPLATE_WEB_YAMAKO:
+      return {
+        backgroundColor: "bg-gray-1",
+        textColor: "text-gray-1",
       };
     default:
       return {

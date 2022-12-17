@@ -7,6 +7,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        "gray-1": "#333333",
+        "gray-6": "#F2F2F2",
         watanasa: {
           "primary-100": "#e6f7ff",
           "primary-200": "#bae7ff",
@@ -90,6 +92,10 @@ module.exports = {
           "gray-1": "#333333",
           "gray-2": "#4F4F4F",
           "gray-3": "#828282",
+        },
+        yamako: {
+          "gray-1": "#2E2E48",
+          "gray-2": "#818181",
         },
         default: {
           /// Shades
