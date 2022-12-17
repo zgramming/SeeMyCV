@@ -36,13 +36,13 @@ const SkillSection = ({ skills }: { skills: CVSkillInterface[] }) => {
 
           return (
             <div key={keyLevel} className="flex flex-col space-y-5">
-              <div className="text-gray-1 font-bold 2xl:text-xl">
+              <div className="text-gray-1 font-bold text-lg 2xl:text-xl">
                 {nameLevel}
               </div>
               <div className="flex flex-wrap gap-5">
                 {skillItems.map((skill, index) => {
                   return (
-                    <div key={skill.id} className="2xl:text-lg">
+                    <div key={skill.id} className="text-base 2xl:text-lg">
                       {skill.name}
                     </div>
                   );
