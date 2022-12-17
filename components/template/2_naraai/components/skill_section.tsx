@@ -1,24 +1,19 @@
-import { Button, Card } from "antd";
+import { Card } from "antd";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-import { faClover } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { GroupSkillInterface } from "../../../../interface/cv/cvskill_grouping_interface";
 import { CVSkillInterface } from "../../../../interface/cv/cvskill_interface";
 import IconAdvanceSVG from "../../../../public/template/2_naraai/advance.svg";
-import IconIntermediateSVG from "../../../../public/template/2_naraai/intermediate.svg";
 import IconBasicSVG from "../../../../public/template/2_naraai/basic.svg";
 import IconBeginnerSVG from "../../../../public/template/2_naraai/beginner.svg";
+import IconIntermediateSVG from "../../../../public/template/2_naraai/intermediate.svg";
 import {
   CODE_LEVEL_ADVANCE,
   CODE_LEVEL_BASIC,
   CODE_LEVEL_BEGINNER,
   CODE_LEVEL_INTERMEDIATE,
 } from "../../../../utils/constant";
-interface GroupSkillInterface {
-  [level: string]: CVSkillInterface[];
-}
 
 const SkillSection = ({ skills }: { skills: CVSkillInterface[] }) => {
   const [groupingSkill, setGroupingSkill] = useState<

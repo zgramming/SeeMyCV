@@ -10,6 +10,7 @@ import CustomLayout from "../../components/layout/custom_layout";
 import WatanasaTemplate from "../../components/template/1_watanasa/watanasa_template";
 import NaraaiTemplate from "../../components/template/2_naraai/naraai_template";
 import HoshiruTemplate from "../../components/template/3_hoshiru/hoshiru_template";
+import YamakoTemplate from "../../components/template/4_yamako/yamako_template";
 import DefaultTemplateWebsite from "../../components/template/default/default_template_website";
 import { Users } from "../../interface/main_interface";
 import userStore from "../../repository/user_store";
@@ -17,6 +18,7 @@ import {
   CODE_TEMPLATE_WEB_HOSHIRU,
   CODE_TEMPLATE_WEB_NARAAI,
   CODE_TEMPLATE_WEB_WATANASA,
+  CODE_TEMPLATE_WEB_YAMAKO,
 } from "../../utils/constant";
 
 const HandlerTemplate = ({ user }: { user: Users }) => {
@@ -27,6 +29,8 @@ const HandlerTemplate = ({ user }: { user: Users }) => {
       return <NaraaiTemplate user={user} />;
     case CODE_TEMPLATE_WEB_HOSHIRU:
       return <HoshiruTemplate user={user} />;
+    case CODE_TEMPLATE_WEB_YAMAKO:
+      return <YamakoTemplate user={user} />;
 
     default:
       return <DefaultTemplateWebsite user={user} />;
