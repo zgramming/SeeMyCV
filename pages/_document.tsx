@@ -4,6 +4,7 @@ export default function Document() {
   return (
     <Html lang="id">
       <Head>
+        <link rel="icon" href="/images/logo_primary.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -18,7 +19,10 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
           rel="stylesheet"
         />
-        <link rel="icon" href="/images/logo_primary.png" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <body>
         <Main />

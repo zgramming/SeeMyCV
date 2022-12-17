@@ -1,21 +1,13 @@
 import { useEffect, useRef } from "react";
 
 import { CVEducationInterface } from "../../../interface/cv/cveducation_interface";
-import { CVExperienceInterface } from "../../../interface/cv/cvexperience_interface";
 import { CVLicenseCertificateInterface } from "../../../interface/cv/cvlicensecertificate_interface";
 import { CVPortfolioInterface } from "../../../interface/cv/cvportfolio_interface";
 import { CVSkillInterface } from "../../../interface/cv/cvskill_interface";
 import { Users } from "../../../interface/main_interface";
 import navigationScrollToComponent from "../../../repository/navigation_scrollto_component";
+import ExperienceSection from "./components/experience_section";
 import ProfileSection from "./components/profile_section";
-
-const ExperienceSection = ({
-  experience,
-}: {
-  experience: CVExperienceInterface[];
-}) => {
-  return <></>;
-};
 
 const EducationSection = ({
   educations,

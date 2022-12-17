@@ -8,7 +8,9 @@ module.exports = {
     extend: {
       colors: {
         "gray-1": "#333333",
+        "gray-2": "#4F4F4F",
         "gray-6": "#F2F2F2",
+        "gray-7": "#79819A",
         watanasa: {
           "primary-100": "#e6f7ff",
           "primary-200": "#bae7ff",
@@ -121,6 +123,7 @@ module.exports = {
         "josefin-sans": ["Josefin Sans", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
         "dm-sans": ["DM Sans", "sans-serif"],
+        outfit: ["Outfit", "sans-serif"],
       },
     },
   },
