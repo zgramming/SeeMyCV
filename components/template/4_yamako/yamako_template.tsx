@@ -2,16 +2,12 @@ import { useEffect, useRef } from "react";
 
 import { CVLicenseCertificateInterface } from "../../../interface/cv/cvlicensecertificate_interface";
 import { CVPortfolioInterface } from "../../../interface/cv/cvportfolio_interface";
-import { CVSkillInterface } from "../../../interface/cv/cvskill_interface";
 import { Users } from "../../../interface/main_interface";
 import navigationScrollToComponent from "../../../repository/navigation_scrollto_component";
 import EducationSection from "./components/education_section";
 import ExperienceSection from "./components/experience_section";
 import ProfileSection from "./components/profile_section";
-
-const SkillSection = ({ skills }: { skills: CVSkillInterface[] }) => {
-  return <></>;
-};
+import SkillSection from "./components/skill_section";
 
 const PortfolioSection = ({
   portfolios,
