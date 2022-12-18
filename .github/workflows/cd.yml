@@ -36,6 +36,8 @@ jobs:
             echo "NPM I if available new package"
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
+            echo "First we kill instance PM2 for saving memory"
+            pm2 del web
             npm --help
             npm i
             echo "Re-build application"
