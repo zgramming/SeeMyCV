@@ -43,4 +43,4 @@ jobs:
             echo "Re-build application"
             npm run build
             echo "Restart Application, web is name pm2 instance application"  
-            pm2 restart web
+            pm2 start npm --name web -- start -- --port=3000
