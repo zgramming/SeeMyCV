@@ -37,10 +37,10 @@ const ProfileSection = ({ user }: { user: Users }) => {
         <Col span={24} md={24} lg={16} xl={16} xxl={18}>
           <div className="flex flex-col space-y-5">
             <div className="flex flex-col space-y-5">
-              <div className="text-yamako-gray-1 text-xl font-medium">
+              <div className="text-yamako-gray-1 text-lg font-medium lg:text-xl 2xl:text-2xl">
                 {user.name}
               </div>
-              <div className="text-yamako-gray-1 font-semibold text-2xl">
+              <div className="text-yamako-gray-1 font-semibold text-xl lg:text-2xl 2xl:text-3xl">
                 {profile?.motto}
               </div>
               <div className="text-yamako-gray-2 text-sm leading-loose text-justify">
