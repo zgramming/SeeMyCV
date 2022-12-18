@@ -23,7 +23,7 @@ export class NavigationScrollToComponent {
   scrollTo = (codeMenu: string) => {
     this.refs
       ?.find((val) => val.code === codeMenu)
-      ?.ref.current!.scrollIntoView({ behavior: "smooth" });
+      ?.ref.current!.scrollIntoView({ behavior: "smooth", block: "end" });
   };
 
   setRefs = (params: RefsParams[]) => {
